@@ -305,11 +305,12 @@ containing a value of this type.
         public static final int act_item02=0x7f030009;
         public static final int act_item03=0x7f03000a;
         public static final int act_item04=0x7f03000b;
-        public static final int act_node_menu=0x7f03000c;
-        public static final int act_signup=0x7f03000d;
-        public static final int act_topbar=0x7f03000e;
-        public static final int act_wel=0x7f03000f;
-        public static final int popupwindow_calendar=0x7f030010;
+        public static final int act_map=0x7f03000c;
+        public static final int act_node_menu=0x7f03000d;
+        public static final int act_signup=0x7f03000e;
+        public static final int act_topbar=0x7f03000f;
+        public static final int act_wel=0x7f030010;
+        public static final int popupwindow_calendar=0x7f030011;
     }
     public static final class string {
         public static final int action_add=0x7f080022;

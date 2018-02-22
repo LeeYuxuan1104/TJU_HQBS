@@ -58,7 +58,7 @@ public class VNodeMenuActivity extends Activity implements OnClickListener{
 	private ProgressDialog  	vDialog;	 // 对话框;
 	private MTGetOrPostHelper	mtGetOrPostHelper;
 	private Bundle				mbundle;
-	private String				ownner;
+	private String				ownner,lng,lat;
 	private Intent				mIntent;
 	private ArrayAdapter<String>mAdapter;
 	//	数据库参照;
@@ -298,6 +298,7 @@ public class VNodeMenuActivity extends Activity implements OnClickListener{
 				//	进行数据容器的设定;
 				Map<String, String> map		=	list2.get(position);
 				String				content =	null;
+				
 				switch (btnposition) {
 				//	第1个按钮;
 				case 0:
@@ -306,8 +307,8 @@ public class VNodeMenuActivity extends Activity implements OnClickListener{
 					String model =	map.get("model");
 					String price =	map.get("price");
 					String count =	map.get("count");
-					String lng	 =	map.get("lng");
-					String lat	 =	map.get("lat");
+					lng	 		 =	map.get("lng");
+					lat	 		 =	map.get("lat");
 					String deadline=map.get("deadline");
 					content=
 					"ID编号："+id+"\r\n"+
@@ -359,8 +360,12 @@ public class VNodeMenuActivity extends Activity implements OnClickListener{
 						@Override
 						public void onClick(DialogInterface arg0, int arg1) {
 							//	进行地图的定位点;
-							mIntent=new Intent(mContext, VGeoFenceActivity.class);
-							startActivityForResult(mIntent, 3);	
+							mIntent=new Intent(mContext, VMapShowActivity.class);
+							mbundle=new Bundle();
+							mbundle.putString("lng", lng);
+							mbundle.putString("lat", lat);
+							mIntent.putExtras(mbundle);
+							startActivity(mIntent);
 						}
 					});	
 				}
