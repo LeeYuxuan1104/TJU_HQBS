@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <include
+        android:id="@+id/includeTop"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        layout="@layout/act_topbar" />
+
+    <LinearLayout
+        android:id="@+id/layBottom"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/shape_round_bottom"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:id="@+id/layinfo"
+            style="@style/input_style_edit"
+            tools:ignore="UselessParent" >
+
+            <Button
+                android:id="@+id/btnSubmit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/btn01"
+                android:text="@string/submit"
+                android:textColor="#ffffff"
+                android:textSize="10sp"
+                tools:ignore="SmallSp" />
+
+            <com.model.tool.view.MTEditTextWithDel
+                android:id="@+id/etinfo"
+                style="@style/input_style_EditTextWithDel"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/btnSubmit"
+                android:hint="@string/input"
+                android:inputType="textMultiLine"
+                android:maxLength="800"
+                android:minLines="1" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/layBottom"
+        android:layout_below="@id/includeTop"
+        android:background="#ffffff" >
+
+        <ListView
+            android:id="@+id/listinfo"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:divider="#ffffff"
+            android:dividerHeight="0dp"
+            android:cacheColorHint="#00000000" >
+        </ListView>
+    </LinearLayout>
+</RelativeLayout>

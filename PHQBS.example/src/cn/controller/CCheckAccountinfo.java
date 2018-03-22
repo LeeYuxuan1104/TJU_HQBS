@@ -50,8 +50,9 @@ public class CCheckAccountinfo extends HttpServlet{
 		String result=null;
 		String head=id.substring(0, 1);
 		if(head.equalsIgnoreCase("d")){
-			Driver driver=new Driver();
-			result=driver.checkDriver(id, pwd);
+			Driver driver= new Driver();
+			String sql	 = "select * from driver where id='"+id+"' and password='"+pwd+"'";
+			result		 = driver.queryItemBySQL(sql);
 		}else if(head.equalsIgnoreCase("n")){
 			Node node=new Node();
 			result=node.checkNode(id, pwd);

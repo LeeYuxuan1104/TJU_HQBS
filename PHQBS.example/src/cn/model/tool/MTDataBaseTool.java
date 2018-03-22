@@ -18,7 +18,7 @@ public class MTDataBaseTool {
 	private String dbport	= "3306";
 	private String url 		= "jdbc:mysql://"+dbaddress+":"+dbport+"/" + dbName;
 	public MTDataBaseTool() {
-	
+		super();
 	}
 	
 	public MTDataBaseTool(String driver, String dbName, String password,

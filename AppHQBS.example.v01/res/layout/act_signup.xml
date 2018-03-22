@@ -26,7 +26,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:background="@drawable/btn07"
+            android:background="@drawable/btn01"
             android:text="@string/signup"
             android:textColor="#ffffff"
             android:textSize="20sp" />
@@ -42,13 +42,8 @@
         android:orientation="vertical" >
 
         <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/shape_edit" >
+            android:id="@+id/layname"
+            style="@style/input_style_edit" >
 
             <TextView
                 android:id="@+id/tvname"
@@ -62,25 +57,17 @@
 
             <com.model.tool.view.MTEditTextWithDel
                 android:id="@+id/etname"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                style="@style/input_style_EditTextWithDel"
                 android:layout_alignParentRight="true"
-                android:layout_marginLeft="10sp"
+                android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/tvname"
-                android:background="@null"
                 android:hint="@string/input"
-                android:inputType="text"
-                android:singleLine="true" />
+                android:inputType="text" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/shape_edit" >
+            android:id="@+id/laytel"
+            style="@style/input_style_edit" >
 
             <TextView
                 android:id="@+id/tvtel"
@@ -94,25 +81,17 @@
 
             <com.model.tool.view.MTEditTextWithDel
                 android:id="@+id/ettel"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                style="@style/input_style_EditTextWithDel"
                 android:layout_alignParentRight="true"
-                android:layout_marginLeft="10sp"
+                android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/tvtel"
-                android:background="@null"
                 android:hint="@string/input"
-                android:inputType="text"
-                android:singleLine="true" />
+                android:inputType="text" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/shape_edit" >
+            android:id="@+id/laypwd"
+            style="@style/input_style_edit" >
 
             <TextView
                 android:id="@+id/tvpwd"
@@ -126,25 +105,17 @@
 
             <com.model.tool.view.MTEditTextWithDel
                 android:id="@+id/etpwd"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                style="@style/input_style_EditTextWithDel"
                 android:layout_alignParentRight="true"
-                android:layout_marginLeft="10sp"
+                android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/tvpwd"
-                android:background="@null"
                 android:hint="@string/input"
-                android:inputType="textPassword"
-                android:singleLine="true" />
+                android:inputType="textPassword" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/shape_edit" >
+            android:id="@+id/laykind"
+            style="@style/input_style_edit" >
 
             <TextView
                 android:id="@+id/tvkind"
@@ -161,6 +132,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="10sp"
                 android:layout_marginRight="10dp"
                 android:layout_toRightOf="@id/tvkind"
@@ -172,13 +144,7 @@
 
         <RelativeLayout
             android:id="@+id/laycar"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/shape_edit"
+            style="@style/input_style_edit"
             android:visibility="gone" >
 
             <TextView
@@ -193,28 +159,18 @@
 
             <com.model.tool.view.MTEditTextWithDel
                 android:id="@+id/etcarnumber"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                style="@style/input_style_EditTextWithDel"
                 android:layout_alignParentRight="true"
-                android:layout_marginLeft="10sp"
+                android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/tvcarnumber"
-                android:background="@null"
                 android:hint="@string/input"
-                android:inputType="text"
-                android:singleLine="true" />
+                android:inputType="text" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/laynode"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/shape_edit" 
-            android:visibility="gone"
-            >
+            style="@style/input_style_edit"
+            android:visibility="gone" >
 
             <TextView
                 android:id="@+id/tvnodeaddress"
@@ -230,9 +186,9 @@
                 android:id="@+id/btnLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
-                android:background="@drawable/btn07"
+                android:layout_centerVertical="true"
+                android:background="@drawable/btn01"
                 android:text="@string/locate"
                 android:textColor="#ffffff"
                 android:textSize="10sp"
@@ -240,17 +196,13 @@
 
             <com.model.tool.view.MTEditTextWithDel
                 android:id="@+id/etnodeaddress"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                style="@style/input_style_EditTextWithDel"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="10sp"
-                android:layout_marginRight="10sp"
                 android:layout_toLeftOf="@id/btnLocation"
                 android:layout_toRightOf="@id/tvnodeaddress"
-                android:background="@null"
                 android:hint="@string/input"
                 android:inputType="text"
-                android:singleLine="true" />
+                />
         </RelativeLayout>
     </LinearLayout>
 

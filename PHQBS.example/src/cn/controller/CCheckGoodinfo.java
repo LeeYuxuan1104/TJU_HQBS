@@ -26,7 +26,7 @@ public class CCheckGoodinfo extends HttpServlet{
 		//	1.查询所有客户;
 		case 1:
 			good	=	new Good();
-			sResult	=	good.getGoodList();
+			sResult	=	good.queryAllSQL();
 			break;
 		//	2.修改件数信息;
 		case 2:
@@ -39,7 +39,7 @@ public class CCheckGoodinfo extends HttpServlet{
 				String id=items[0];
 				String count=items[1];
 				sql="update good set count='"+count+"' where model='"+id+"'";
-				good.updateGood(sql);				
+				good.updateSQL(sql);				
 			}
 			
 			break;

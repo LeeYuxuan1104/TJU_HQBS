@@ -6,8 +6,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import com.hqbs.app.R;
 import com.model.entity.MEAccount;
+import com.model.entity.MEPerson;
 import com.model.tool.system.MTConfigure;
 import com.model.tool.system.MTGetOrPostHelper;
+import com.model.tool.system.MTIDHelper;
 import com.model.tool.view.MTEditTextWithDel;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -39,6 +41,7 @@ public class VWelActivity extends Activity implements OnClickListener{
 	private ProgressDialog  vDialog;	// 对话框;	
 	private MTGetOrPostHelper mGetOrPostHelper; // 与网络有关的帮助类;
 	private MEAccount		meAccount;
+	private MTIDHelper		idHelper;
 	
 	@SuppressLint("HandlerLeak")
 	public Handler mHandler = new Handler() {
@@ -55,10 +58,8 @@ public class VWelActivity extends Activity implements OnClickListener{
 			case MTConfigure.NTAG_SUCCESS:		
 				//	提示符;
 				Toast.makeText(mContext, R.string.tip_success,Toast.LENGTH_LONG).show();
-				//	id编号;
-				String id=bundle.getString("id");
 				//	发送页面;
-				sendAct(id, bundle);
+				sendAct(bundle);
 				break;
 			//	结果错误信号;
 			case MTConfigure.NTAG_FAIL:
@@ -73,11 +74,14 @@ public class VWelActivity extends Activity implements OnClickListener{
 		}
 	};
 	
-	
 	//	进行相应的页面跳转;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		if(mContext==null){			
+			mContext=VWelActivity.this;
+		}
+		chooseOper(mContext);
 		setContentView(R.layout.act_wel);
 		initView();
 		initEvent();
@@ -89,12 +93,33 @@ public class VWelActivity extends Activity implements OnClickListener{
 		vpwd=(MTEditTextWithDel) findViewById(R.id.etpwd);
 		vlogin=(Button) findViewById(R.id.btnlogin);
 	}
+	private void chooseOper(Context context){
+		idHelper=new MTIDHelper(context, "userinfo", Context.MODE_APPEND);
+		boolean flag=idHelper.isIdExist();
+		if(flag){
+			MEPerson person=idHelper.getPerson();
+			//	id编号;
+			String   id		=person.getPid();
+			String   pwd	=person.getPpwd();
+			String   name	=person.getPname();
+			String   kind	=person.getPkind();
+			if(kind.equalsIgnoreCase("n")){
+				mIntent=new Intent(mContext, VNodeMenuActivity.class);
+			}else if(kind.equalsIgnoreCase("d")){
+				mIntent=new Intent(mContext, VDriverMenuActivity.class);
+			}
+			Bundle bundle=new Bundle();
+			bundle.putString("id", id);
+			bundle.putString("pwd", pwd);
+			bundle.putString("name", name);
+			mIntent.putExtras(bundle);
+			startActivity(mIntent);
+			finish();
+		}
+	}
 	
 	//	控件的初始化;
 	private void initEvent(){
-		if(mContext==null){			
-			mContext=VWelActivity.this;
-		}
 		vlogin.setOnClickListener(this);
 		vsignup.setText(Html.fromHtml("若无账号请选择&nbsp;&nbsp;<a href=\"\">注  册</a>"));	
 		vsignup.setOnClickListener(this);
@@ -107,7 +132,6 @@ public class VWelActivity extends Activity implements OnClickListener{
 			mThread=null;
 		}
 	}
-	////
 	//进行登录的线程;
 	class MyThread extends Thread{
 		private MTGetOrPostHelper mtGetOrPostHelper;
@@ -162,8 +186,6 @@ public class VWelActivity extends Activity implements OnClickListener{
 			mHandler.sendMessage(msg);
 		}
 	}
-			
-	
 	
 	@Override
 	public void onClick(View view) {
@@ -198,11 +220,21 @@ public class VWelActivity extends Activity implements OnClickListener{
 		}
 	}
 	//	进行跳转
-	private void sendAct(String id,Bundle bundle){
-		String head=id.substring(0, 1);
-		if(head.equalsIgnoreCase("n")){
+	private void sendAct(Bundle bundle){
+		//	id编号;
+		String   id		=bundle.getString("id");
+		String   pwd	=bundle.getString("pwd");
+		String   name	=bundle.getString("name");
+		String   kind	=id.substring(0, 1);
+		MEPerson person	=new MEPerson(id, pwd,name,kind);
+		//	设置公用对象;
+		idHelper.setPerson(person);
+		//	设置默认的身份;
+		idHelper.setIdentity();
+		
+		if(kind.equalsIgnoreCase("n")){
 			mIntent=new Intent(mContext, VNodeMenuActivity.class);
-		}else if(head.equalsIgnoreCase("d")){
+		}else if(kind.equalsIgnoreCase("d")){
 			mIntent=new Intent(mContext, VDriverMenuActivity.class);
 		}
 		mIntent.putExtras(bundle);

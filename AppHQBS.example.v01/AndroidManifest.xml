@@ -88,6 +88,27 @@
             >
         </activity>
         <activity
+            android:name="com.view.VDriverMenuActivity"
+            android:theme="@android:style/Theme.NoTitleBar" 
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode = "stateAlwaysHidden|adjustPan"
+            >
+        </activity>
+        <activity
+            android:name="com.view.VDeliveryDetailActivity"
+            android:theme="@android:style/Theme.NoTitleBar" 
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode = "stateAlwaysHidden|adjustPan"
+            >
+        </activity>
+        <activity
+            android:name="com.view.VDeliveryHistoryActivity"
+            android:theme="@android:style/Theme.NoTitleBar" 
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode = "stateAlwaysHidden|adjustPan"
+            >
+        </activity>
+        <activity
             android:name="com.view.VSignupActivity"
             android:theme="@android:style/Theme.NoTitleBar" 
             android:screenOrientation="portrait"
@@ -124,6 +145,13 @@
             >
         </activity>
         <activity
+            android:name="com.view.VDriverAdd2Activity"
+            android:theme="@android:style/Theme.NoTitleBar" 
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode = "stateAlwaysHidden|adjustPan"
+            >
+        </activity>
+        <activity
             android:name="com.view.VGoodAddActivity"
             android:theme="@android:style/Theme.NoTitleBar" 
             android:screenOrientation="portrait"
@@ -137,5 +165,15 @@
             android:windowSoftInputMode = "stateAlwaysHidden|adjustPan"
             >
         </activity>
+        <activity
+            android:name="com.view.VWeixinActivity"
+            android:theme="@android:style/Theme.NoTitleBar" 
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode = "stateAlwaysHidden|adjustPan"
+            >
+        </activity>
+        <!-- 注册服务包 :需要把相应的内容信息写清楚:包名称-->
+        <service android:name="com.controller.ReceiveDataService" >
+        </service>
     </application>
 </manifest>

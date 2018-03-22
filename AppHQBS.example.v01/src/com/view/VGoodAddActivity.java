@@ -35,12 +35,11 @@ public class VGoodAddActivity extends Activity implements OnClickListener{
 	private Context	mContext;
 	private TextView vBack,vTopic,vSubmit;
 	private ListView vListShow;
-	//////////////////////////////////////////
 	//**需要改正*//
 	private MTGetOrPostHelper	mtGetOrPostHelper;
 	private MyThread			mThread=null;// 自定义的上传线程;
 	private ProgressDialog  	vDialog;	 // 对话框;
-	private MyAdapter	myAdapter;
+	private MyAdapter			myAdapter;
 	private ArrayList<Map<String, String>> lists;
 	
 	@SuppressLint("HandlerLeak")

@@ -76,8 +76,7 @@ public class CCheckNodeinfo extends HttpServlet{
 			sql		=	"insert into node (id,password,lng,lat,name,tel,address) values (" +
 						"'"+id+"','"+password+"',"+lng+","+lat+",'"+name+"','"+tel+"','"+address+"')";
 			node	=	new Node();
-//			System.out.println("sql_node="+sql);
-			sResult	=	node.updateNode(sql);
+			sResult	=	node.updateSQL(sql);
 			break;
 		default:
 			break;

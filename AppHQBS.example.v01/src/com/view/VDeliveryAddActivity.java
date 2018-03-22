@@ -14,32 +14,37 @@ import com.model.entity.MEDelivery;
 import com.model.tool.system.MTConfigure;
 import com.model.tool.system.MTGetOrPostHelper;
 import com.model.tool.view.MTEditTextWithDel;
-import com.model.tool.view.PopupWindows;
+import com.model.tool.view.MTPopupWindows;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class VDeliveryAddActivity extends Activity implements OnClickListener{
+public class VDeliveryAddActivity extends Activity implements OnClickListener,OnFocusChangeListener{
 	//	上下文定义;
 	private Context				mContext;
+	private Resources			mResources;
+	
 	//	按钮的内容;
-	private TextView 			vBack,vTopic;
+	private TextView 			vBack,vTopic,vBargain;
 	private Button 				btnSumit,vLocation;
 	private Spinner 			spdriver,spmodel;
 	private TextView 			etbrand,etprice;
@@ -47,14 +52,16 @@ public class VDeliveryAddActivity extends Activity implements OnClickListener{
 	//	自定义的参数内容;
 	private MTGetOrPostHelper	mtGetOrPostHelper;
 	private MyThread			mThread=null;// 自定义的上传线程;
-//	private MTConfigure			mtConfigure;
+	private MTConfigure			mtConfigure;
 	private ProgressDialog  	vDialog;	 // 对话框;
 	private Intent				mIntent;
+	private Bundle				mBundle;
 	private String 				ownner;
 	private SimpleAdapter		driverAdapter,goodsAdapter;
+	private RelativeLayout		laycount,laygoal,laydeadline;
 	//	参数自定义;
-	private String driver,model;
-	private double lng,lat;
+	private String 				driver,model;
+	private double 				lng,lat;
 	private MEDelivery			delivery;
 	
 	@SuppressLint("HandlerLeak")
@@ -92,9 +99,7 @@ public class VDeliveryAddActivity extends Activity implements OnClickListener{
 			default:
 				break;
 			}
-//			loadData(list1,list2);
-			//	关闭线程的操作;
-//			mtConfigure.closeThread(mThread);
+			//	关闭线程;
 			closeThread();
 		}
 	};
@@ -110,6 +115,8 @@ public class VDeliveryAddActivity extends Activity implements OnClickListener{
 	private void initView(){
 		vBack	=	(TextView) findViewById(R.id.btnBack);
 		vTopic	=	(TextView) findViewById(R.id.tvTopic);	
+		vBargain = 	(TextView) findViewById(R.id.btnFunction);
+		
 		btnSumit=	(Button) findViewById(R.id.btnSumit);
 		vLocation=	(Button) findViewById(R.id.btnLocation);
 		spdriver=	(Spinner) findViewById(R.id.spdriver);
@@ -119,23 +126,37 @@ public class VDeliveryAddActivity extends Activity implements OnClickListener{
 		etcount	=	(MTEditTextWithDel) findViewById(R.id.etcount);
 		etgoal	=	(MTEditTextWithDel) findViewById(R.id.etgoal);
 		etdeadline=	(MTEditTextWithDel) findViewById(R.id.etdeadline);
+		laycount=	(RelativeLayout) findViewById(R.id.laycount);
+		laygoal	=	(RelativeLayout) findViewById(R.id.laygoal);
+		laydeadline=(RelativeLayout) findViewById(R.id.laydeadline);
 	}
 	//	事件初始化;
 	private void initEvent(){
-		mContext	=	VDeliveryAddActivity.this;
-//		mtConfigure	=	new MTConfigure();
+		if(mContext==null){			
+			mContext	=	VDeliveryAddActivity.this;
+		}
+		mResources	=	getResources();
+		mtConfigure	=	new MTConfigure();
 		mtGetOrPostHelper=new MTGetOrPostHelper();
 		vTopic.setText(R.string.action_add);
 		vBack.setText(R.string.no);
 		vBack.setVisibility(View.VISIBLE);
+		vBargain.setText(R.string.bargain);
+		vBargain.setVisibility(View.VISIBLE);
+		
 		vBack.setOnClickListener(this);
 		vLocation.setOnClickListener(this);
+		vBargain.setOnClickListener(this);
 		etdeadline.setOnClickListener(this);
 		btnSumit.setOnClickListener(this);
 		mIntent		=	getIntent();
 		Bundle	bundle=mIntent.getExtras();
 		ownner		=	bundle.getString("ownner");
 		initLoadDataFromServer(ownner);
+		//	进行按钮的监听;
+		etcount.setOnFocusChangeListener(this);
+		etgoal.setOnFocusChangeListener(this);
+		etdeadline.setOnFocusChangeListener(this);
 	}
 	//	按下的点击事件;
 	@Override
@@ -153,7 +174,7 @@ public class VDeliveryAddActivity extends Activity implements OnClickListener{
 			break;
 		//	时间按钮;
 		case R.id.etdeadline:
-			new PopupWindows(mContext, etdeadline,etdeadline);
+			new MTPopupWindows(mContext, etdeadline,etdeadline);
 			break;
 		//	提交内容;
 		case R.id.btnSumit:
@@ -181,6 +202,14 @@ public class VDeliveryAddActivity extends Activity implements OnClickListener{
 					mThread.start();
 				}
 			}else Toast.makeText(mContext, "请正确输入", Toast.LENGTH_SHORT).show();				
+			break;
+		case R.id.btnFunction:
+			mIntent=new Intent(mContext, VWeixinActivity.class);
+			mBundle=new Bundle();
+			mBundle.putString("node_id", ownner);
+			mBundle.putString("driver_id", driver);
+			mIntent.putExtras(mBundle);
+			startActivity(mIntent);
 			break;
 		default:
 			break;
@@ -378,5 +407,23 @@ public class VDeliveryAddActivity extends Activity implements OnClickListener{
 				Toast.makeText(mContext,"定位完成", Toast.LENGTH_SHORT).show();
 			}
 		}
+	}
+	@Override
+	public void onFocusChange(View view, boolean flag) {
+		int nVid=view.getId();
+		switch (nVid) {
+		case R.id.etcount:
+			mtConfigure.setViewDrawable(flag, mResources, laycount, R.drawable.shape_edit0, R.drawable.shape_edit1);
+			break;
+		case R.id.etgoal:
+			mtConfigure.setViewDrawable(flag, mResources, laygoal, R.drawable.shape_edit0, R.drawable.shape_edit1);
+			break;
+		case R.id.etdeadline:
+			mtConfigure.setViewDrawable(flag, mResources, laydeadline, R.drawable.shape_edit0, R.drawable.shape_edit1);
+			break;
+		default:
+			break;
+		}
+		
 	}
 }

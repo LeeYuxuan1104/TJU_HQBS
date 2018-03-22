@@ -14,12 +14,14 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
@@ -28,24 +30,25 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class VSignupActivity extends Activity implements OnClickListener{
+public class VSignupActivity extends Activity implements OnClickListener,OnFocusChangeListener{
 	//	上下文内容;
-	private Context mContext;
-	private Intent  mIntent;
+	private Context 			mContext;
+	private Intent  			mIntent;
+	private Resources 			mResources;
 	//	控件内容;
-	private TextView vBack,vTopic;
-	private Button vResign,vLocation;
-	private MTEditTextWithDel vname,vtel,vpwd,vcarnumber,vnodeaddress;
-	private Spinner vkind;
-	private RelativeLayout laycar,laynode;
+	private TextView 			vBack,vTopic;
+	private Button 				vResign,vLocation;
+	private MTEditTextWithDel 	vname,vtel,vpwd,vcarnumber,vnodeaddress;
+	private Spinner 			vkind;
+	private RelativeLayout 		laycar,laynode,layname,laytel,laypwd,laykind;
 	//	参数内容;
-//	private MTConfigure			mtConfigure;
+	private MTConfigure			mtConfigure;
 	private MTGetOrPostHelper	mtGetOrPostHelper;
-	private String[] kinds={"D","N"};
-	private String 	 kind;
-	private double	 lng,lat;
-	private MEDriver driver;
-	private MENode	 node;
+	private String[] 			kinds={"D","N"};
+	private String 	 			kind;
+	private double	 			lng,lat;
+	private MEDriver 			driver;
+	private MENode	 			node;
 	//	线程管理函数;
 	private MyThread		mThread=null;// 自定义的上传线程;
 	private ProgressDialog  vDialog;	// 对话框;
@@ -107,12 +110,17 @@ public class VSignupActivity extends Activity implements OnClickListener{
 		vkind	=(Spinner) findViewById(R.id.spkind);
 		laycar	=(RelativeLayout) findViewById(R.id.laycar);
 		laynode	=(RelativeLayout) findViewById(R.id.laynode);
+		layname=(RelativeLayout) findViewById(R.id.layname);
+		laytel=(RelativeLayout) findViewById(R.id.laytel);
+		laypwd=(RelativeLayout) findViewById(R.id.laypwd);
+		laykind=(RelativeLayout) findViewById(R.id.laykind);
 	}
 	//	初始化事件;
 	private void initEvent(){
 		//	上下文内容;
 		mContext	=	VSignupActivity.this;
-//		mtConfigure	=	new MTConfigure();
+		mResources	=	getResources();
+		mtConfigure	=	new MTConfigure();
 		//	类型为首个;
 		kind		=	kinds[0];
 		//	初始化相应的控件内容;
@@ -125,6 +133,13 @@ public class VSignupActivity extends Activity implements OnClickListener{
 		//	注册键的触发;
 		vResign.setOnClickListener(this);
 		vLocation.setOnClickListener(this);
+		//	按键触发;
+		vname.setOnFocusChangeListener(this);
+		vtel.setOnFocusChangeListener(this);
+		vpwd.setOnFocusChangeListener(this);
+		vcarnumber.setOnFocusChangeListener(this);
+		vnodeaddress.setOnFocusChangeListener(this);	
+		
 		//	身份选择;
 		vkind.setOnItemSelectedListener(new OnItemSelectedListener() {
 
@@ -292,5 +307,32 @@ public class VSignupActivity extends Activity implements OnClickListener{
 			msg.setData(bundle);
 			mHandler.sendMessage(msg);
 		}
+	}
+	@Override
+	public void onFocusChange(View view, boolean flag) {
+		int nVid=view.getId();
+		switch (nVid) {
+		case R.id.etname:
+			mtConfigure.setViewDrawable(flag, mResources, layname, R.drawable.shape_edit0, R.drawable.shape_edit1);
+			break;
+		case R.id.ettel:
+			mtConfigure.setViewDrawable(flag, mResources, laytel, R.drawable.shape_edit0, R.drawable.shape_edit1);
+			break;
+		case R.id.etpwd:
+			mtConfigure.setViewDrawable(flag, mResources, laypwd, R.drawable.shape_edit0, R.drawable.shape_edit1);
+			break;
+		case R.id.etcarnumber:
+			mtConfigure.setViewDrawable(flag, mResources, laycar, R.drawable.shape_edit0, R.drawable.shape_edit1);
+			break;
+		case R.id.etnodeaddress:
+			mtConfigure.setViewDrawable(flag, mResources, laynode, R.drawable.shape_edit0, R.drawable.shape_edit1);
+			break;
+		case R.id.spkind:
+			mtConfigure.setViewDrawable(flag, mResources, laykind, R.drawable.shape_edit0, R.drawable.shape_edit1);
+			break;
+		default:
+			break;
+		}
+		
 	}
 }

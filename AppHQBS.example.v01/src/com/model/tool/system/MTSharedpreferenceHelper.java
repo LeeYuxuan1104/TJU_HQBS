@@ -17,6 +17,10 @@ public class MTSharedpreferenceHelper {
 		editor = sPreferences.edit();
 	}
 	
+	public MTSharedpreferenceHelper() {
+		super();
+	}
+
 	public void putValue(String key, String value){
 		editor.putString(key, value);
 		editor.commit();

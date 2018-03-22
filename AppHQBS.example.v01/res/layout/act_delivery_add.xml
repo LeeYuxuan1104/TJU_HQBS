@@ -21,15 +21,8 @@
 
         <Button
             android:id="@+id/btnSumit"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/btn07"
-            android:text="@string/submit"
-            android:textColor="#ffffff"
-            android:textSize="20sp" />
+            style="@style/btn_style_submit"
+            android:text="@string/submit" />
     </LinearLayout>
 
     <ScrollView
@@ -47,13 +40,8 @@
             tools:ignore="ScrollViewSize" >
 
             <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/shape_edit" >
+                android:id="@+id/layname"
+                style="@style/input_style_edit" >
 
                 <TextView
                     android:id="@+id/tvname"
@@ -67,24 +55,15 @@
 
                 <Spinner
                     android:id="@+id/spdriver"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/spinner_style"
                     android:layout_alignParentRight="true"
-                    android:layout_marginLeft="10sp"
-                    android:layout_marginRight="10dp"
-                    android:layout_toRightOf="@id/tvname"
-                    android:spinnerMode="dropdown"
-                    android:theme="@style/customtitlebar" />
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/tvname" />
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/shape_edit" >
+                android:id="@+id/laymodel"
+                style="@style/input_style_edit" >
 
                 <TextView
                     android:id="@+id/tvmodel"
@@ -98,24 +77,15 @@
 
                 <Spinner
                     android:id="@+id/spmodel"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/spinner_style"
                     android:layout_alignParentRight="true"
-                    android:layout_marginLeft="10sp"
-                    android:layout_marginRight="10dp"
-                    android:layout_toRightOf="@id/tvmodel"
-                    android:spinnerMode="dropdown"
-                    android:theme="@style/customtitlebar" />
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/tvmodel" />
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/shape_edit" >
+                android:id="@+id/laybrand"
+                style="@style/input_style_edit" >
 
                 <TextView
                     android:id="@+id/tvbrand"
@@ -135,19 +105,14 @@
                     android:layout_marginLeft="10sp"
                     android:layout_toRightOf="@id/tvbrand"
                     android:background="@null"
-                    android:textColor="#000000"
-                    android:textSize="20sp"
                     android:gravity="center"
-                    />
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
             </RelativeLayout>
+
             <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/shape_edit" >
+                android:id="@+id/layprice"
+                style="@style/input_style_edit" >
 
                 <TextView
                     android:id="@+id/tvprice"
@@ -167,20 +132,16 @@
                     android:layout_marginLeft="10sp"
                     android:layout_toRightOf="@id/tvprice"
                     android:background="@null"
-                    android:textColor="#000000"
-                    android:textSize="20sp"
                     android:gravity="center"
-                    />
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/shape_edit" >
+                android:id="@+id/laycount"
+                style="@style/input_style_edit"
+                android:focusable="true"
+                android:focusableInTouchMode="true" >
 
                 <TextView
                     android:id="@+id/tvcount"
@@ -194,25 +155,17 @@
 
                 <com.model.tool.view.MTEditTextWithDel
                     android:id="@+id/etcount"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/input_style_EditTextWithDel"
                     android:layout_alignParentRight="true"
-                    android:layout_marginLeft="10sp"
+                    android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/tvcount"
-                    android:background="@null"
                     android:hint="@string/input"
-                    android:inputType="text|number"
-                    android:singleLine="true" />
+                    android:inputType="text|number" />
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/shape_edit" >
+                android:id="@+id/laygoal"
+                style="@style/input_style_edit" >
 
                 <TextView
                     android:id="@+id/tvgoal"
@@ -230,7 +183,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/btn07"
+                    android:background="@drawable/btn01"
                     android:text="@string/locate"
                     android:textColor="#ffffff"
                     android:textSize="10sp"
@@ -238,27 +191,17 @@
 
                 <com.model.tool.view.MTEditTextWithDel
                     android:id="@+id/etgoal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/input_style_EditTextWithDel"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="10sp"
-                    android:layout_marginRight="10sp"
                     android:layout_toLeftOf="@id/btnLocation"
                     android:layout_toRightOf="@id/tvgoal"
-                    android:background="@null"
                     android:hint="@string/input"
-                    android:inputType="text"
-                    android:singleLine="true" />
+                    android:inputType="text" />
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/shape_edit" >
+                android:id="@+id/laydeadline"
+                style="@style/input_style_edit" >
 
                 <TextView
                     android:id="@+id/tvdeadline"
@@ -272,17 +215,14 @@
 
                 <com.model.tool.view.MTEditTextWithDel
                     android:id="@+id/etdeadline"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/input_style_EditTextWithDel"
                     android:layout_alignParentRight="true"
-                    android:layout_marginLeft="10sp"
+                    android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/tvdeadline"
-                    android:background="@null"
                     android:clickable="true"
-                	android:focusableInTouchMode="false"
+                    android:focusableInTouchMode="false"
                     android:hint="@string/input"
-                    android:inputType="text|datetime"
-                    android:singleLine="true" />
+                    android:inputType="text|datetime" />
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>

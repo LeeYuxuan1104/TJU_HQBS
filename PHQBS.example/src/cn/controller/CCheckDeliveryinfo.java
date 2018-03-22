@@ -21,8 +21,7 @@ public class CCheckDeliveryinfo extends HttpServlet{
 		int 			operType=	Integer.parseInt(req.getParameter("opertype"));
 		String  		sResult =   null;
 		Delivery		delivery=	null;
-		String 			ownner,driver,model,goal,price,lng,lat,count,deadline,sql;
-		System.out.println("OPER="+operType);
+		String 			ownner,driver,model,goal,price,lng,lat,count,deadline,state,sql;
 		switch (operType) {
 		//	1.查询司机姓名+电池名称;
 		case 1:
@@ -52,9 +51,25 @@ public class CCheckDeliveryinfo extends HttpServlet{
 			""+lat+"," +
 			"'"+deadline+"'," +
 			"'"+goal+"')";
-			System.out.println("sql="+sql);
 			delivery=	new Delivery();
-			sResult	=	delivery.updateDelivery(sql);
+			sResult	=	delivery.updateSQL(sql);
+			break;
+		//	3.查询相应的货单;
+		case 3:
+			driver	=	req.getParameter("driver");
+			state	=	req.getParameter("state");
+			sql		=	"select ownner,model,price,count,lng,lat,deadline,goal,id from delivery where driver='"+driver+"' and state="+state;
+			delivery=	new Delivery();
+			sResult	=	delivery.queryBySQL(sql);
+			break;
+		//	4.输入相应的品牌;
+		case 4:
+			driver	=	req.getParameter("driver");
+			state	=	req.getParameter("state");
+			model	=	req.getParameter("model");
+			sql		=	"select ownner,model,price,count,lng,lat,deadline,goal,id from delivery where driver='"+driver+"' and state="+state+" and model='"+model+"'";
+			delivery=	new Delivery();
+			sResult	=	delivery.queryBySQL(sql);
 			break;
 		default:
 			break;

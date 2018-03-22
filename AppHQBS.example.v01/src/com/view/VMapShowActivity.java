@@ -74,7 +74,7 @@ public class VMapShowActivity extends Activity implements OnClickListener{
 	        .draggable(true));
 	    //	显示坐标的地图中心;
 	    aMap. moveCamera(CameraUpdateFactory.changeLatLng(new LatLng(lat, lng)));
-
+	    Log.i("MyLog", "marker="+marker);
 	}
 	@Override
 	public void onClick(View view) {

@@ -21,7 +21,7 @@ import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.hqbs.app.R;
-import com.model.tool.view.CheckPermissionsActivity;
+import com.model.tool.view.MTCheckPermissionsActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -37,7 +37,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 
 @SuppressLint("HandlerLeak")
-public class VGeoFenceActivity extends CheckPermissionsActivity
+public class VGeoFenceActivity extends MTCheckPermissionsActivity
 		implements
 			OnClickListener,
 			GeoFenceListener,

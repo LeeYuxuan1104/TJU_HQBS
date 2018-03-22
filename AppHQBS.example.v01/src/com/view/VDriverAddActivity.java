@@ -24,7 +24,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-//import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,13 +40,13 @@ public class VDriverAddActivity extends Activity implements OnClickListener{
 	private ListView vListShow;
 	//////////////////////////////////////////
 	//**需要改正*//
-	private MTGetOrPostHelper	mtGetOrPostHelper;
 	private MyThread			mThread=null;// 自定义的上传线程;
 	private ProgressDialog  	vDialog;	 // 对话框;
 	//	进行数据库的操作;
-	private MTSQLiteHelper 	  	mSqLiteHelper;// 数据库的帮助类;
-	private SQLiteDatabase 	  	mDB; 		  // 数据库件;
-	private Cursor 		   	  	mCursor;	  //03.数据库遍历签;
+	private MTGetOrPostHelper	mtGetOrPostHelper;
+	private MTSQLiteHelper 	    mSqLiteHelper;// 数据库的帮助类;
+	private SQLiteDatabase 	    mDB; // 数据库件;
+	private Cursor 		   	  	mCursor;	  // 数据库遍历签;
 	private ArrayList<Map<String, String>> list;
 	private MyAdapter			mAdapter;
 	//	回收站点的参数;
@@ -124,7 +123,7 @@ public class VDriverAddActivity extends Activity implements OnClickListener{
 		vListShow.setAdapter(mAdapter);
 	}
 	//	进行初始化查询;
-	private void initLoadDataFromServer(String param,SQLiteDatabase	mDB){
+	private void initLoadDataFromServer(String param,SQLiteDatabase mDB){
 		if(mThread==null){
 			mThread=new MyThread(mtGetOrPostHelper, param, "init",mDB);
 			mThread.start();
@@ -157,11 +156,11 @@ public class VDriverAddActivity extends Activity implements OnClickListener{
 		node_id	=	mBundle.getString("ownner");
 		
 		//	网络信息内容;
-		mtGetOrPostHelper=new MTGetOrPostHelper();
+		mtGetOrPostHelper= new MTGetOrPostHelper();
 		//	数据库信息的初始化;
-		mSqLiteHelper 	 = new MTSQLiteHelper(mContext);
-		//	数据库的获得构造函数;
-		mDB 		  	 = mSqLiteHelper.getmDB();
+		mSqLiteHelper	 = new MTSQLiteHelper(mContext);
+		mDB				 = mSqLiteHelper.getmDB();
+		
 		vTopic.setText(R.string.action_add);
 		vBack.setText(R.string.no);
 		vBack.setVisibility(View.VISIBLE);
@@ -224,7 +223,7 @@ public class VDriverAddActivity extends Activity implements OnClickListener{
 									//	进行插入,当数据不重复的情况下;
 									sql="insert into driver (id,carnumber,name,state) select '"+id+"','"+carnumber+"','"+name+"','0' where not exists (select id from driver where id = '"+id+"')";
 									mDB.execSQL(sql);
-//									//	下角标进行迭加;
+									//	下角标进行迭加;
 									i++;
 								} catch (JSONException e) {
 									//	当出现异常的情况下,进行跳出;
@@ -257,24 +256,21 @@ public class VDriverAddActivity extends Activity implements OnClickListener{
 		
 		public MyAdapter(Context context,List<Map<String, String>> list) {
 			this.list=list;
-			inflater=LayoutInflater.from(context);
+			inflater =LayoutInflater.from(context);
 			this.size=this.list.size();
 		}
 		@Override
 		public int getCount() {
-			// TODO Auto-generated method stub
 			return size;
 		}
 
 		@Override
 		public Object getItem(int position) {
-			// TODO Auto-generated method stub
 			return list.get(position);
 		}
 
 		@Override
 		public long getItemId(int position) {
-			// TODO Auto-generated method stub
 			return position;
 		}
 		
@@ -347,7 +343,7 @@ public class VDriverAddActivity extends Activity implements OnClickListener{
 				final CharSequence strDialogTitle = getString(R.string.wait);
 				final CharSequence strDialogBody = getString(R.string.doing);
 				vDialog = ProgressDialog.show(mContext, strDialogTitle,strDialogBody, true);
-				mThread=new MyThread(mtGetOrPostHelper, param,"submit",null);
+				mThread = new MyThread(mtGetOrPostHelper, param,"submit",null);
 				mThread.start();
 			}
 			break;

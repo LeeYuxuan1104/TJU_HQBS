@@ -8,8 +8,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.hqbs.app.R;
+import com.model.entity.MEPerson;
 import com.model.tool.system.MTConfigure;
 import com.model.tool.system.MTGetOrPostHelper;
+import com.model.tool.system.MTIDHelper;
 import com.model.tool.system.MTSQLiteHelper;
 import com.model.tool.view.MTEditTextWithDel;
 
@@ -20,6 +22,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,6 +30,7 @@ import android.os.Message;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -37,33 +41,36 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class VNodeMenuActivity extends Activity implements OnClickListener{
+public class VNodeMenuActivity extends Activity implements OnClickListener,OnFocusChangeListener{
 	//	上下文的内容;
 	private Context			mContext;	
-	private TextView 		vTopic,vFunction;
+	private Resources		mResources;
+	
+	private TextView 		vTopic,vFunction,vBack;
 	private ImageView 		vSearch;
 	private MTEditTextWithDel etSearch;
 	private ImageView 		vLeft,vMiddle,vRight;
-	private RelativeLayout 	lLeft,lMiddle,lRight;
+	private RelativeLayout 	lLeft,lMiddle,lRight,laysearch;
 	private ListView  		vListData;
 	//	变量参数;
 	private String [] t_top={"回收单","回收员","新电池"};
 	private int [] 	  t_sel={R.drawable.tab_bar_icon_list_sel,R.drawable.tab_bar_icon_per_sel,R.drawable.tab_bar_icon_bat_sel};
 	private int [] 	  t_nar={R.drawable.tab_bar_icon_list_nar,R.drawable.tab_bar_icon_per_nar,R.drawable.tab_bar_icon_bat_nar};
 	//	下角标;
-	private int btnposition=0;
+	private int 	  			btnposition=0;
 	//	自定的参数;
-	private MyThread			mThread=null;// 自定义的上传线程;
-	private MTConfigure			mtConfigure;
 	private ProgressDialog  	vDialog;	 // 对话框;
-	private MTGetOrPostHelper	mtGetOrPostHelper;
 	private Bundle				mbundle;
 	private String				ownner,lng,lat;
 	private Intent				mIntent;
 	private ArrayAdapter<String>mAdapter;
 	//	数据库参照;
-	private MTSQLiteHelper 	  mSqLiteHelper;// 数据库的帮助类;
-	private SQLiteDatabase 	  mDB; // 数据库件;
+	private MyThread			mThread=null;// 自定义的上传线程;
+	private MTConfigure			mtConfigure;
+	private MTGetOrPostHelper	mtGetOrPostHelper;
+	private MTSQLiteHelper 	    mSqLiteHelper;// 数据库的帮助类;
+	private SQLiteDatabase 	    mDB; // 数据库件;
+	private MTIDHelper			idHelper;
 	
 	@SuppressLint("HandlerLeak")
 	@SuppressWarnings("unchecked")
@@ -112,14 +119,12 @@ public class VNodeMenuActivity extends Activity implements OnClickListener{
 		super.onRestart();
 		//	重新进行数据加载;
 		switch (btnposition) {
-		//	查询所有的回收单信息;
-		case 0:
-			
-			break;
 		//	查询所有数据信息;
 		case 1:
 			queryDataFromServer(ownner, btnposition, "queryall",mDB);
 			break;
+		//	查询所有的回收单信息;
+		case 0:
 		//	查询所有电池信息;
 		case 2:
 			queryDataFromServer(ownner, btnposition, "queryall",null);
@@ -133,6 +138,24 @@ public class VNodeMenuActivity extends Activity implements OnClickListener{
 	public void onClick(View view) {
 		int nVid=view.getId();
 		switch (nVid) {
+		case R.id.btnBack:
+			Builder builder=new Builder(mContext);
+			builder.setTitle(R.string.exit);
+			builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface arg0, int arg1) {
+					MEPerson person=new MEPerson(null, null);
+					idHelper.setPerson(person);
+					idHelper.setIdentity();
+					mIntent=new Intent(mContext, VWelActivity.class);
+					startActivity(mIntent);
+					finish();
+				}
+			});
+			builder.setNegativeButton(R.string.no, null);
+			builder.create();
+			builder.show(); 
+			break;
 		case R.id.layleft:
 			etSearch.setText("");
 			btnposition=0;
@@ -177,7 +200,8 @@ public class VNodeMenuActivity extends Activity implements OnClickListener{
 				break;
 			//	新增信息的加载;
 			case 1:
-				mIntent=new Intent(mContext, VDriverAddActivity.class);
+//				mIntent=new Intent(mContext, VDriverAddActivity.class);
+				mIntent=new Intent(mContext, VDriverAdd2Activity.class);
 				mbundle=new Bundle();
 				mbundle.putString("ownner", ownner);
 				mIntent.putExtras(mbundle);
@@ -199,31 +223,40 @@ public class VNodeMenuActivity extends Activity implements OnClickListener{
 	}
 	//	初始化控件;
 	private void initView(){
-		//	标题栏;
+		//	标题文栏;
 		vTopic	=(TextView) findViewById(R.id.tvTopic);
+		//	搜索输入框;
 		etSearch=(MTEditTextWithDel) findViewById(R.id.etsearch);
+		//	搜索按钮;
 		vSearch	=(ImageView) findViewById(R.id.isearch);
+		//	左边按钮;
 		vLeft	=(ImageView) findViewById(R.id.btnleft);
+		//	中间按钮;
 		vMiddle	=(ImageView) findViewById(R.id.btnmiddle);
+		//	右边按钮;
 		vRight	=(ImageView) findViewById(R.id.btnright);
 		lLeft	=(RelativeLayout) findViewById(R.id.layleft);
 		lMiddle	=(RelativeLayout) findViewById(R.id.laymiddle);
 		lRight	=(RelativeLayout) findViewById(R.id.layright);
 		vFunction=(TextView) findViewById(R.id.btnFunction);
+		vBack	=(TextView) findViewById(R.id.btnBack);
 		vListData=(ListView) findViewById(R.id.listShow);
-		
+		//	探索布局;
+		laysearch=(RelativeLayout) findViewById(R.id.laysearch);
 	}
 	//	初始化事件;
 	private void initEvent(){
 		if(mContext==null){			
 			mContext	 = VNodeMenuActivity.this;
 		}
+		mResources		 = getResources();
 		mtGetOrPostHelper= new MTGetOrPostHelper();
 		mtConfigure		 = new MTConfigure();
+		idHelper		 = new MTIDHelper(mContext, "userinfo", Context.MODE_APPEND);
 		//	数据库信息的初始化;
-		mSqLiteHelper 	 = new MTSQLiteHelper(mContext);
-		//	数据库的获得构造函数;
-		mDB 		  	 = mSqLiteHelper.getmDB();
+		mSqLiteHelper	 = new MTSQLiteHelper(mContext);
+		mDB				 = mSqLiteHelper.getmDB();
+
 		//	网络进行加载;
 		vTopic.setText(t_top[0]);
 		vLeft.setBackgroundResource(t_sel[0]);
@@ -232,16 +265,21 @@ public class VNodeMenuActivity extends Activity implements OnClickListener{
 		lLeft.setOnClickListener(this);
 		lMiddle.setOnClickListener(this);
 		lRight.setOnClickListener(this);
+		btnposition=0;
+		//	按钮键;
+		vBack.setText("退出");
+		vBack.setVisibility(View.VISIBLE);
 		vFunction.setText("新增");
 		vFunction.setVisibility(View.VISIBLE);
 		//	数值的初始化;
 		mIntent =getIntent();
 		mbundle =mIntent.getExtras();
 		ownner	=mbundle.getString("id");
-		btnposition=0;
 		//	添加事件监听;
 		vSearch.setOnClickListener(this);
+		vBack.setOnClickListener(this);
 		vFunction.setOnClickListener(this);
+		etSearch.setOnFocusChangeListener(this);
 	}
 	//	进行图像的初始化;
 	private void initChooseState(int position){
@@ -279,10 +317,7 @@ public class VNodeMenuActivity extends Activity implements OnClickListener{
 	}
 	//	进行数据读取的加载内容;
 	private void loadData(ArrayList<String> list1,final ArrayList<Map<String, String>> list2){
-		//	上下文信息的加载;
-		if(mContext==null){
-			mContext=VNodeMenuActivity.this;
-		}
+		//	适配器的使用;
 		mAdapter=new ArrayAdapter<String>(mContext, R.layout.act_item01,R.id.content, list1);
 		vListData.setAdapter(mAdapter);
 		
@@ -578,20 +613,21 @@ public class VNodeMenuActivity extends Activity implements OnClickListener{
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			Builder builder=new Builder(mContext);
-			builder.setTitle(R.string.exit);
-			builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface arg0, int arg1) {
-					mIntent=new Intent(mContext, VWelActivity.class);
-					startActivity(mIntent);
-					finish();
-				}
-			});
-			builder.setNegativeButton(R.string.no, null);
-			builder.create();
-			builder.show();  
+			finish();
 	    }
 		return super.onKeyDown(keyCode, event);
+	}
+
+	@Override
+	public void onFocusChange(View view, boolean flag) {
+		int nVid=view.getId();
+		switch (nVid) {
+		case R.id.etsearch:
+			mtConfigure.setViewDrawable(flag, mResources, laysearch, R.drawable.shape_edit0, R.drawable.shape_edit1);
+			break;
+		default:
+			break;
+		}
+		
 	}
 }

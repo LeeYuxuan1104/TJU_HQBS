@@ -54,4 +54,22 @@
     <servlet-name>good_info</servlet-name>
     <url-pattern>/good_info</url-pattern>
   </servlet-mapping>
+  <!-- collection -->
+  <servlet>
+    <servlet-name>collection_info</servlet-name>
+    <servlet-class>cn.controller.CCheckCollectioninfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>collection_info</servlet-name>
+    <url-pattern>/collection_info</url-pattern>
+  </servlet-mapping>
+  <!-- 进行网络聊天的 -->
+  <servlet>
+    <servlet-name>weixintalk_info</servlet-name>
+    <servlet-class>cn.controller.CCheckWeixintalkinfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>weixintalk_info</servlet-name>
+    <url-pattern>/weixintalk_info</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -10,7 +10,7 @@ public class MTSQLiteHelper {
     private MTDBHelper 	   		 	mDBhelper;	//  辅助控件;
 	private final String DB_NAME	="db_hqbs";
 	private final int 	 DB_VERSION =1;
-    
+
 	public SQLiteDatabase getmDB() {
 		return mDB;
 	}
@@ -19,11 +19,11 @@ public class MTSQLiteHelper {
 		this.mDB = mDB;
 	}
 
-	public MTSQLiteHelper(Context mContext) {
-		File 	file 	=	mContext.getFilesDir();
+	public MTSQLiteHelper(Context context) {
+		File 	file	=	context.getCacheDir();		
 		String 	path 	= 	file.getAbsolutePath() + "/"+DB_NAME;
-		mDBhelper  		= 	new MTDBHelper(mContext, path, DB_VERSION);
-		mDB 			= 	mDBhelper.getReadableDatabase();
+		mDBhelper  		= 	new MTDBHelper(context, path, DB_VERSION);
+		mDB 			= 	mDBhelper.getReadableDatabase();	
 	}
 	
 	public void doCloseDataBase(){

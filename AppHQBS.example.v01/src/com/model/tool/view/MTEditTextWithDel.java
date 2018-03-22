@@ -3,6 +3,9 @@ package com.model.tool.view;
 import com.hqbs.app.R;
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.text.Editable;
@@ -17,7 +20,10 @@ public class MTEditTextWithDel extends EditText {
 	private Drawable imgInable;
 	private Drawable imgAble;
 	private Context mContext;
-
+	//	下划线的内容;
+	private Paint mPaint; 
+	private int   kind;
+	
 	public MTEditTextWithDel(Context context) {
 		super(context);
 		mContext = context;
@@ -50,9 +56,33 @@ public class MTEditTextWithDel extends EditText {
 			}
 		});
 		setDrawable();
+		kind=chooseKind();
+		if(kind==1){
+			//	画笔的内容;
+			mPaint = new Paint();  
+			mPaint.setStyle(Paint.Style.STROKE);  
+			// 你可以根据自己的具体需要在此处对画笔做更多个性化设置  
+			mPaint.setColor(Color.BLUE);			
+		}
+	}
+	private int chooseKind(){
+		String txt=getHint().toString();
+		if(txt.equals("请输入您的账号")||txt.equals("请输入您的密码")){
+			return 1;
+		}else return 0;
 	}
 	
-	//����ɾ��ͼƬ
+	
+	
+	@Override  
+    public void onDraw(Canvas canvas) {  
+        super.onDraw(canvas);  
+        if(kind==1){        	
+        	// 画底线  
+        	canvas.drawLine(0, this.getHeight() - 1, this.getWidth() - 1, this.getHeight() - 1, mPaint);  
+        }
+    }  
+	// 设置背景图片;
 	private void setDrawable() {
 		if(length() < 1)
 			setCompoundDrawablesWithIntrinsicBounds(null, null, imgInable, null);
@@ -60,7 +90,7 @@ public class MTEditTextWithDel extends EditText {
 			setCompoundDrawablesWithIntrinsicBounds(null, null, imgAble, null);
 	}
 	
-	 // ����ɾ���¼�
+	// 按下的标签内容;
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (imgAble != null && event.getAction() == MotionEvent.ACTION_UP) {
