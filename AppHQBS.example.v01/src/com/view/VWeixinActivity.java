@@ -25,6 +25,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
@@ -274,6 +275,7 @@ public class VWeixinActivity extends Activity implements OnClickListener,OnFocus
 					"driver_id="+meBargaininfo.getDriver_id()+"&" +
 					"target="+meBargaininfo.getTarget()+"&" +
 					"message="+URLEncoder.encode(meBargaininfo.getMessage(),"utf-8");
+				Log.i("MyLog", "param="+param);
 				response  = mGOrPostHelper.sendGet(url, param);
 
 			} catch (UnsupportedEncodingException e) {

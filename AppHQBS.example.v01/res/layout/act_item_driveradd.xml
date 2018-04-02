@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5sp"
+    android:layout_marginBottom="5sp"
+    >
+    <Button 
+        android:id="@+id/btnsubmit"
+        style="@style/button_style_small"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:text="@string/submit"
+        />
+    <TextView 
+        android:id="@+id/name"
+        style="@style/textview_style_content"
+        android:layout_toLeftOf="@id/btnsubmit"
+        android:layout_centerVertical="true"
+        />
+    <TextView 
+        android:id="@+id/driver_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        />
+</RelativeLayout>

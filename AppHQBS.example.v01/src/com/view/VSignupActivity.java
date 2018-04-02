@@ -50,8 +50,8 @@ public class VSignupActivity extends Activity implements OnClickListener,OnFocus
 	private MEDriver 			driver;
 	private MENode	 			node;
 	//	线程管理函数;
-	private MyThread		mThread=null;// 自定义的上传线程;
-	private ProgressDialog  vDialog;	// 对话框;
+	private MyThread			mThread=null;// 自定义的上传线程;
+	private ProgressDialog  	vDialog;	 // 对话框;
 	@SuppressLint("HandlerLeak")
 	public Handler mHandler = new Handler() {
 		@Override
@@ -66,8 +66,7 @@ public class VSignupActivity extends Activity implements OnClickListener,OnFocus
 			//	结果正确信号;
 			case MTConfigure.NTAG_SUCCESS:		
 				//	提示符;
-				Toast.makeText(mContext, R.string.tip_success,Toast.LENGTH_LONG).show();
-				finish();
+				Toast.makeText(mContext, R.string.signup_success,Toast.LENGTH_LONG).show();
 				break;
 			//	结果错误信号;
 			case MTConfigure.NTAG_FAIL:
@@ -78,8 +77,8 @@ public class VSignupActivity extends Activity implements OnClickListener,OnFocus
 				break;
 			}
 			//	关闭线程的操作;
-//			mtConfigure.closeThread(mThread);
 			closeThread();
+			finish();
 		}
 	};
 	private void closeThread(){

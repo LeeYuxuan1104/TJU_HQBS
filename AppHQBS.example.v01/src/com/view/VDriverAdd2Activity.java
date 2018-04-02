@@ -1,5 +1,10 @@
 package com.view;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -7,18 +12,22 @@ import org.json.JSONObject;
 import com.hqbs.app.R;
 import com.model.tool.system.MTConfigure;
 import com.model.tool.system.MTGetOrPostHelper;
+import com.model.tool.system.MTSQLiteHelper;
+import com.model.tool.view.MTDriverAddAdapter;
 import com.model.tool.view.MTEditTextWithDel;
-import com.view.VDriverAddActivity.MyThread;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
@@ -33,7 +42,7 @@ public class VDriverAdd2Activity extends Activity implements OnClickListener,OnF
 	private Context		mContext;
 	private Resources	mResources;
 	/*控件的初始化*/
-	private TextView	vBack,vTopic;
+	private TextView	vBack,vTopic,vSubmit;
 	private RelativeLayout laysearch;
 	private ImageView	visearch;
 	private MTEditTextWithDel etsearch;
@@ -44,14 +53,30 @@ public class VDriverAdd2Activity extends Activity implements OnClickListener,OnF
 	private ProgressDialog  	vDialog;	 // 对话框;
 	//	进行数据库的操作;
 	private MTGetOrPostHelper	mtGetOrPostHelper;
+	//	适配器的内容;
+	private MTDriverAddAdapter	mtDriverAddAdapter;
+	//	进行数据库的操作;
+	//	1.数据库的帮助类;
+	private MTSQLiteHelper		sqlHelper;
+	//	2.数据库的控制类;
+	private SQLiteDatabase		sqlDB;
+	//	3.查询的游标内容;
+	private Cursor 		   	  	mCursor;	  // 数据库遍历签;
+	//	4.初始化表单;
+	private ArrayList<String>	initDrivers;
+	//	字符串的内容;
+	private String 				node_id;
 	
 	@SuppressLint("HandlerLeak")
+	@SuppressWarnings("unchecked")
 	public Handler mHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
 			//	控制符的标签;
 			Bundle bundle= msg.getData();
 			int    nFlag = bundle.getInt("flag");
+			String oper  = bundle.getString("oper");
+			ArrayList<Map<String, String>> list1=(ArrayList<Map<String, String>>) bundle.getSerializable("list1");
 			//	关闭对话方框;
 			if(vDialog!=null){				
 				vDialog.dismiss();
@@ -62,11 +87,10 @@ public class VDriverAdd2Activity extends Activity implements OnClickListener,OnF
 			case MTConfigure.NTAG_SUCCESS:		
 				//	提示符;
 				Toast.makeText(mContext, R.string.tip_success,Toast.LENGTH_LONG).show();
-//				loadData();
 				//	对话框显示;
-				if(vDialog!=null){
-					finish();
-				}
+				if(oper.equals("search")){
+					loadData(list1);
+				}else finish();
 				break;
 			//	结果错误信号;
 			case MTConfigure.NTAG_FAIL:
@@ -87,6 +111,7 @@ public class VDriverAdd2Activity extends Activity implements OnClickListener,OnF
 		}
 	}
 	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -104,6 +129,8 @@ public class VDriverAdd2Activity extends Activity implements OnClickListener,OnF
 		visearch =(ImageView) findViewById(R.id.isearch);
 		etsearch =(MTEditTextWithDel) findViewById(R.id.etsearch);
 		vlistshow=(ListView) findViewById(R.id.listshow);
+		//	提交的按钮;
+		vSubmit	 =(TextView) findViewById(R.id.btnFunction);
 	}
 	//	事件初始化;
 	private void initEvent(){
@@ -116,15 +143,28 @@ public class VDriverAdd2Activity extends Activity implements OnClickListener,OnF
 		mtConfigure =	new MTConfigure();
 		//	网络控件内容;
 		mtGetOrPostHelper	=	new MTGetOrPostHelper();
+		//	数据库的初始值;
+		sqlHelper	=	new MTSQLiteHelper(mContext);
+		sqlDB		=	sqlHelper.getmDB();
 		//	初始化控件值;
 		vBack.setText(R.string.no);
 		vBack.setVisibility(View.VISIBLE);
 		vTopic.setText(R.string.action_add);
+		vSubmit.setText(R.string.submit);
+		vSubmit.setVisibility(View.VISIBLE);
 		vBack.setOnClickListener(this);
 		etsearch.setOnFocusChangeListener(this);
 		visearch.setOnClickListener(this);
+		vSubmit.setOnClickListener(this);
+		//	初始化的数据源;
+		Intent intent=getIntent();
+		Bundle bundle=intent.getExtras();
+		node_id		 =bundle.getString("ownner");
+		//	所选单的内容;
+		initDrivers=initData();
 	}
 	//	点击事件监听;
+	@SuppressWarnings({"rawtypes", "unchecked" })
 	@Override
 	public void onClick(View view) {
 		int nVid=view.getId();
@@ -137,30 +177,58 @@ public class VDriverAdd2Activity extends Activity implements OnClickListener,OnF
 		case R.id.isearch:
 			getInfo();
 			break;
+		//	提交按钮;
+		case R.id.btnFunction:
+			ArrayList<Map<String, String>> list=mtDriverAddAdapter.getListinfo();
+			Iterator iterator=list.iterator();
+			String param="node_id="+node_id+"&driver_id=";
+			while (iterator.hasNext()) {
+				Map<String, String> map=(Map<String, String>) iterator.next();
+				String id	=map.get("id");
+				String state=map.get("state");
+				param	   +=id+"_"+state+",";
+			}
+			if(mThread==null){
+				final CharSequence strDialogTitle = getString(R.string.wait);
+				final CharSequence strDialogBody = getString(R.string.doing);
+				vDialog = ProgressDialog.show(mContext, strDialogTitle,strDialogBody, true);
+				mThread = new MyThread(mtGetOrPostHelper,param,"submit",null);
+				mThread.start();
+			}
+			break;
 		default:
 			break;
 		}
 	}
 	//	进行搜索内容;
 	private void getInfo(){
-		if(mThread==null){
-			final CharSequence strDialogTitle = getString(R.string.wait);
-			final CharSequence strDialogBody = getString(R.string.doing);
-//			vDialog = ProgressDialog.show(mContext, strDialogTitle,strDialogBody, true);
-//			mThread = new MyThread(mtGetOrPostHelper, param,"submit",null);
-//			mThread.start();
+		String getinfo=etsearch.getText().toString();
+		if(getinfo instanceof String)
+			if(mThread==null){
+				final CharSequence strDialogTitle = getString(R.string.wait);
+				final CharSequence strDialogBody = getString(R.string.doing);
+				vDialog = ProgressDialog.show(mContext, strDialogTitle,strDialogBody, true);
+				mThread = new MyThread(mtGetOrPostHelper, "name="+getinfo,"search",initDrivers);
+				mThread.start();
+			}
+		else {			
+			Toast.makeText(mContext, "数据类型非字符串", Toast.LENGTH_SHORT).show();
+			return ;
 		}
+				
 	}
 	//	进行数据进行加载;
 	class MyThread extends Thread{
 		private String param,oper;
 		private MTGetOrPostHelper mtGetOrPostHelper;
-		private SQLiteDatabase	  mDB;
-		public MyThread(MTGetOrPostHelper mtGetOrPostHelper,String param,String oper,SQLiteDatabase mDB) {
+		private ArrayList<String> initDrivers;
+		
+		public MyThread(MTGetOrPostHelper mtGetOrPostHelper,String param,String oper,ArrayList<String> initDrivers) {
 			this.mtGetOrPostHelper=mtGetOrPostHelper;
 			this.param			  =param;
 			this.oper			  =oper;
-			this.mDB			  =mDB;
+			//	人员的列表;
+			this.initDrivers	  =initDrivers;
 		}
 		@Override
 		public void run() {
@@ -169,17 +237,18 @@ public class VDriverAdd2Activity extends Activity implements OnClickListener,OnF
 			String  urlhead	 =	null;
 			String  urlbody	 =	null;
 			String  response = 	null;
-			String  sql		 =	null;
 			int     nFlag	 = 	MTConfigure.NTAG_SUCCESS;
 			Message	msg		 =  new Message();
 			Bundle	bundle	 =	new Bundle();
 			JSONArray  array = null;
 			JSONObject obj 	 = null;
+			//	进行数据的插入内容;
+			ArrayList<Map<String, String>>	list1=new ArrayList<Map<String,String>>();
 			int 	nSize	 = 0;
-			if(oper.equals("init")){				
+			if(oper.equals("search")){				
 
 				urlhead			 =	"http://"+MTConfigure.TAG_IP_ADDRESS+":"+MTConfigure.TAG_PORT+"/"+MTConfigure.TAG_PROGRAM+"/driver_info";
-				urlbody			 =  "opertype=1";
+				urlbody			 =  "opertype=3&"+param;
 				response		 =	mtGetOrPostHelper.sendGet(urlhead,urlbody);	
 				////返回结果
 				if(response!=null){
@@ -199,9 +268,17 @@ public class VDriverAdd2Activity extends Activity implements OnClickListener,OnF
 									String id	 = obj.getString("id");
 									String carnumber	 = obj.getString("carnumber");
 									String name	 = obj.getString("name");
-									//	进行插入,当数据不重复的情况下;
-									sql="insert into driver (id,carnumber,name,state) select '"+id+"','"+carnumber+"','"+name+"','0' where not exists (select id from driver where id = '"+id+"')";
-									mDB.execSQL(sql);
+									Log.i("MyLog", id+"|"+carnumber+"|"+name);
+									//	进行数据内容;
+									Map<String , String> map=new HashMap<String, String>();
+									map.put("id", id);
+									map.put("carnumber", carnumber);
+									map.put("name", name);
+									if(initDrivers.contains(id))										
+										map.put("state", "1");
+									else map.put("state", "0");
+									
+									list1.add(map);
 									//	下角标进行迭加;
 									i++;
 								} catch (JSONException e) {
@@ -221,6 +298,8 @@ public class VDriverAdd2Activity extends Activity implements OnClickListener,OnF
 					nFlag	 = 	MTConfigure.NTAG_SUCCESS;
 				}else nFlag	 = 	MTConfigure.NTAG_FAIL;
 			}
+			bundle.putSerializable("list1", list1);
+			bundle.putString("oper", oper);
 			bundle.putInt("flag", nFlag);
 			msg.setData(bundle);
 			mHandler.sendMessage(msg);
@@ -237,5 +316,26 @@ public class VDriverAdd2Activity extends Activity implements OnClickListener,OnF
 		default:
 			break;
 		}
+	}
+	//	进行数据的加载;
+	private void loadData(ArrayList<Map<String, String>> list){
+		mtDriverAddAdapter=new MTDriverAddAdapter(mContext, list);
+		vlistshow.setAdapter(mtDriverAddAdapter);
+	}
+	//	进行数据的初始化;
+	private ArrayList<String> initData(){
+		ArrayList<String> hasDrivers=new ArrayList<String>();
+		String 	sql	=	"select * from driver ";
+		mCursor		=	sqlDB.rawQuery(sql, null);
+		while (mCursor.moveToNext()) {	
+			String id		=	mCursor.getString(mCursor.getColumnIndex("id")).toString();
+			hasDrivers.add(id);
+		}
+		
+		if(mCursor!=null){
+			mCursor.close();
+		}
+
+		return hasDrivers;
 	}
 }

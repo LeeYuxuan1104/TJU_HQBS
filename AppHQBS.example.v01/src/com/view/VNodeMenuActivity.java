@@ -68,9 +68,10 @@ public class VNodeMenuActivity extends Activity implements OnClickListener,OnFoc
 	private MyThread			mThread=null;// 自定义的上传线程;
 	private MTConfigure			mtConfigure;
 	private MTGetOrPostHelper	mtGetOrPostHelper;
-	private MTSQLiteHelper 	    mSqLiteHelper;// 数据库的帮助类;
-	private SQLiteDatabase 	    mDB; // 数据库件;
 	private MTIDHelper			idHelper;
+	//	数据库动作;
+	private MTSQLiteHelper 	    mSqLiteHelper;// 数据库的帮助类;
+	private SQLiteDatabase		sqlDB;
 	
 	@SuppressLint("HandlerLeak")
 	@SuppressWarnings("unchecked")
@@ -89,12 +90,12 @@ public class VNodeMenuActivity extends Activity implements OnClickListener,OnFoc
 			//	结果正确信号;
 			case MTConfigure.NTAG_SUCCESS:		
 				//	提示符;
-				Toast.makeText(mContext, R.string.tip_success,Toast.LENGTH_LONG).show();
+				Toast.makeText(mContext, R.string.tip_success,Toast.LENGTH_SHORT).show();
 				break;
 			//	结果错误信号;
 			case MTConfigure.NTAG_FAIL:
 				//	提示框;
-				Toast.makeText(mContext, R.string.tip_fail,Toast.LENGTH_LONG).show();
+				Toast.makeText(mContext, R.string.tip_fail,Toast.LENGTH_SHORT).show();
 				break;
 			default:
 				break;
@@ -117,18 +118,17 @@ public class VNodeMenuActivity extends Activity implements OnClickListener,OnFoc
 	@Override
 	protected void onRestart() {
 		super.onRestart();
-		//	重新进行数据加载;
 		switch (btnposition) {
-		//	查询所有数据信息;
-		case 1:
-			queryDataFromServer(ownner, btnposition, "queryall",mDB);
+		case 0:			
+			queryDataFromServer(ownner, btnposition, "queryall",null);
 			break;
-		//	查询所有的回收单信息;
-		case 0:
-		//	查询所有电池信息;
+		case 1:
+			queryDataFromServer(ownner, btnposition, "queryall",sqlDB);
+			break;
 		case 2:
 			queryDataFromServer(ownner, btnposition, "queryall",null);
 			break;
+
 		default:
 			break;
 		}
@@ -164,7 +164,7 @@ public class VNodeMenuActivity extends Activity implements OnClickListener,OnFoc
 		case R.id.laymiddle:
 			etSearch.setText("");
 			btnposition=1;	
-			queryDataFromServer(ownner, btnposition, "queryall",mDB);
+			queryDataFromServer(ownner, btnposition, "queryall",sqlDB);
 			break;
 		case R.id.layright:
 			etSearch.setText("");
@@ -179,7 +179,7 @@ public class VNodeMenuActivity extends Activity implements OnClickListener,OnFoc
 					queryDataFromServer(id, btnposition, "queryitem",null);	
 					break;
 				case 1:
-					queryDataFromServer("driver="+id+"&ownner="+ownner, btnposition, "queryitem",null);
+					queryDataFromServer("driver="+id+"&ownner="+ownner, btnposition, "queryitem",sqlDB);
 					break;
 				case 2:
 					queryDataFromServer("model="+id, btnposition, "queryitem",null);
@@ -253,10 +253,9 @@ public class VNodeMenuActivity extends Activity implements OnClickListener,OnFoc
 		mtGetOrPostHelper= new MTGetOrPostHelper();
 		mtConfigure		 = new MTConfigure();
 		idHelper		 = new MTIDHelper(mContext, "userinfo", Context.MODE_APPEND);
-		//	数据库信息的初始化;
+		//	数据库的声明;
 		mSqLiteHelper	 = new MTSQLiteHelper(mContext);
-		mDB				 = mSqLiteHelper.getmDB();
-
+		sqlDB			 = mSqLiteHelper.getmDB();
 		//	网络进行加载;
 		vTopic.setText(t_top[0]);
 		vLeft.setBackgroundResource(t_sel[0]);
@@ -306,12 +305,12 @@ public class VNodeMenuActivity extends Activity implements OnClickListener,OnFoc
 		vTopic.setText(t_top[position]);
 	}
 	//	从服务器端进行数据的查询;
-	private void queryDataFromServer(String param,int position,String oper,SQLiteDatabase mDB){
+	private void queryDataFromServer(String param,int position,String oper,SQLiteDatabase sqlDB){
 		if(mThread==null){
 			final CharSequence strDialogTitle = getString(R.string.wait);
 			final CharSequence strDialogBody = getString(R.string.doing);
 			vDialog = ProgressDialog.show(mContext, strDialogTitle,strDialogBody, true);
-			mThread=new MyThread(mtGetOrPostHelper, param,position,oper,mDB);
+			mThread=new MyThread(mtGetOrPostHelper, param,position,oper,sqlDB);
 			mThread.start();
 		}
 	}
@@ -363,10 +362,10 @@ public class VNodeMenuActivity extends Activity implements OnClickListener,OnFoc
 					String tel 	   =	map.get("tel");
 					String person  =	map.get("person");
 					content=
-					"回收员:"+driver2+"\r\n"+
+					"人员编号:"+driver2+"\r\n"+
 					"车辆编号:"+car+"\r\n"+
 					"电话:"+tel+"\r\n"+
-					"人员:"+person
+					"姓名:"+person
 					;
 					break;
 				//	第3个按钮;
@@ -417,15 +416,15 @@ public class VNodeMenuActivity extends Activity implements OnClickListener,OnFoc
 	class MyThread extends Thread{
 		private String param2,oper;
 		private MTGetOrPostHelper mtGetOrPostHelper;
-		private SQLiteDatabase	  mDB;
 		private int position;
+		private SQLiteDatabase sqlDB;
 		
-		public MyThread(MTGetOrPostHelper mtGetOrPostHelper,String param,int position,String oper,SQLiteDatabase mDB) {
+		public MyThread(MTGetOrPostHelper mtGetOrPostHelper,String param,int position,String oper,SQLiteDatabase sqlDB) {
 			this.mtGetOrPostHelper=mtGetOrPostHelper;
 			this.param2			  =param;
 			this.oper			  =oper;
 			this.position		  =position;
-			this.mDB			  =mDB;
+			this.sqlDB			  =sqlDB;
 		}
 		@Override
 		public void run() {
@@ -434,8 +433,7 @@ public class VNodeMenuActivity extends Activity implements OnClickListener,OnFoc
 			String  url		 =	null;
 			String  param	 =	null;
 			String  response = 	null;
-			//	SQl语句进行操作的内容;
-			String 	sql		 =	null;
+			String  sql		 =  "";
 			//	全局定位的操作符号;
 			int     nFlag	 = 	MTConfigure.NTAG_SUCCESS;
 			Message	msg		 =  new Message();
@@ -453,11 +451,11 @@ public class VNodeMenuActivity extends Activity implements OnClickListener,OnFoc
 			case 0:
 				//	全信息查询;
 				if(oper.equals("queryall")){
-					param			 =  "opertype=1&ownner="+param2;
+					param	 =  "opertype=1&ownner="+param2;
 				}else 
 				//	单信息查询;
 				if(oper.equals("queryitem")){
-					param			 =  "opertype=2&driver="+param2;
+					param	 =  "opertype=2&driver="+param2;
 				}
 				//	跳出循环;
 				break;
@@ -465,11 +463,13 @@ public class VNodeMenuActivity extends Activity implements OnClickListener,OnFoc
 			case 1:
 				//	全信息查询;
 				if(oper.equals("queryall")){
-					param			 =  "opertype=3&ownner="+param2;
+					sql		 =  "delete from driver";
+					sqlDB.execSQL(sql);
+					param	 =  "opertype=3&ownner="+param2;
 				}else 
 				//	单信息查询;
 				if(oper.equals("queryitem")){
-					param			 =  "opertype=4&"+param2;
+					param	 =  "opertype=4&"+param2;
 				}			
 				//	跳出循环;
 				break;
@@ -533,8 +533,6 @@ public class VNodeMenuActivity extends Activity implements OnClickListener,OnFoc
 							break;
 						//	进行回收员信息的处理;
 						case 1:
-							sql	=	"delete from driver";
-							mDB.execSQL(sql);
 							do {
 								try {
 									obj 		 = array.getJSONObject(i);
@@ -549,11 +547,10 @@ public class VNodeMenuActivity extends Activity implements OnClickListener,OnFoc
 									map.put("car", car);
 									map.put("tel", tel);
 									map.put("person", person);
-									
 									list2.add(map);
-									//	进行数据的插入;
 									sql			= "insert into driver (id,carnumber,name,state) values ('"+driver+"','"+car+"','"+person+"','1')";
-									mDB.execSQL(sql);
+									//	数据库的插入;
+									sqlDB.execSQL(sql);
 									i++;
 								} catch (JSONException e) {
 									obj=null;

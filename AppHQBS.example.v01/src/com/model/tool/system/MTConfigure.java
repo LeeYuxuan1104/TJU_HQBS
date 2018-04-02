@@ -10,7 +10,8 @@ import android.widget.EditText;
 
 public class MTConfigure {
 //	public static String TAG_IP_ADDRESS	="39.106.70.111";
-	public static String TAG_IP_ADDRESS	="172.23.45.32";
+	public static String TAG_IP_ADDRESS	="172.23.120.81";
+//	public static String TAG_IP_ADDRESS	="192.168.99.147";
 	public static String TAG_PORT		="8888";
 	public static String TAG_PROGRAM	="PHQBS.example";
 	public static final int 	 NTAG_SUCCESS	=1;

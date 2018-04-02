@@ -7,6 +7,7 @@
     <string name="login">登&#160;&#160;&#160;&#160;录</string>
     <string name="signup">注&#160;&#160;&#160;&#160;册</string>
     <string name="tip_success">成功</string>
+    <string name="signup_success">注册成功</string>
     <string name="tip_fail">失败</string>
     <string name="wait">稍等..</string>
     <string name="doing">加载..</string>
