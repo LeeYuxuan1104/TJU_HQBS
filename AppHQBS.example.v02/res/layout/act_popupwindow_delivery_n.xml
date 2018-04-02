@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#00000000"
+    >
+	<RelativeLayout
+	    android:id="@+id/btnBack"
+	    android:layout_width="60dp"
+	    android:layout_height="60dp"
+	    android:layout_alignParentBottom="true"
+	    android:layout_centerHorizontal="true"
+	    tools:ignore="UselessParent" >
+
+	    <TextView 
+	        android:id="@+id/ivBack"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerInParent="true"
+	        android:background="@drawable/icon_pop_close"
+	        />
+	</RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/layTop"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_above="@id/btnBack"
+        >
+	    <RelativeLayout 
+	        android:id="@+id/laycontent"
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent"
+	        android:layout_alignParentTop="true"
+	        android:layout_marginTop="30dp"
+	        android:orientation="vertical"
+	        android:background="@drawable/shape_background5_n"
+	        >
+	        <TextView 
+	            android:id="@+id/content"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginLeft="20dp"
+	            android:layout_marginRight="20dp"
+	            android:textColor="#000000"
+	            android:textSize="18sp"
+	            android:layout_centerInParent="true"
+	            />
+	        <TextView 
+	            android:id="@+id/topic"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_centerHorizontal="true"
+	            android:layout_marginBottom="30dp"
+	            android:textColor="#000000"
+	            android:textSize="20sp"
+	            android:textStyle="bold"
+	            android:gravity="center"
+	            android:layout_above="@id/content"
+	            />
+	    </RelativeLayout>
+        <TextView 
+            android:id="@+id/ivtop"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/img_pop_bg"
+            />
+        
+    </RelativeLayout>
+
+</RelativeLayout>

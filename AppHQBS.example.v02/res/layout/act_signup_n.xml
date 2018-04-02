@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#eeeee0" >
+
+    <include
+        android:id="@+id/includeTop"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        layout="@layout/act_topbar_n" />
+
+    <Button
+        android:id="@+id/btnsignup"
+        style="@style/btn_signup_n"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/signup" />
+
+    <RelativeLayout
+        android:id="@+id/layhqbs"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/includeTop" >
+
+        <TextView
+            android:id="@+id/ivhqbs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="40dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/hqbs" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/btnsignup"
+        android:layout_below="@id/layhqbs" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            tools:ignore="ScrollViewSize" >
+
+            <LinearLayout
+                android:id="@+id/layedit"
+                style="@style/layout_edit2_n"
+                android:orientation="vertical"
+                tools:ignore="UselessParent" >
+
+                <RelativeLayout
+                    android:id="@+id/layname"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp" >
+
+                    <TextView
+                        android:id="@+id/ivname"
+                        style="@style/image_icon_topic"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/icon_account_g" />
+
+                    <EditText
+                        android:id="@+id/etname"
+                        style="@style/edit_MTEditTextWithDel"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/ivname"
+                        android:hint="@string/input_name"
+                        android:inputType="text" />
+                </RelativeLayout>
+
+                <View style="@style/common_horizontal_division_line_style" />
+
+                <RelativeLayout
+                    android:id="@+id/laypwd"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp" >
+
+                    <TextView
+                        android:id="@+id/ivpwd"
+                        style="@style/image_icon_topic"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/icon_password_g" />
+
+                    <TextView
+                        android:id="@+id/ivclose"
+                        style="@style/image_icon_end"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/icon_register_eye_sel" />
+
+                    <EditText
+                        android:id="@+id/etpwd"
+                        style="@style/edit_MTEditTextWithDel"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@id/ivclose"
+                        android:layout_toRightOf="@id/ivpwd"
+                        android:hint="@string/input_pwd"
+                        android:inputType="textPassword" />
+                </RelativeLayout>
+
+                <View style="@style/common_horizontal_division_line_style" />
+
+                <RelativeLayout
+                    android:id="@+id/layconfirm"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp" >
+
+                    <TextView
+                        android:id="@+id/ivconfirm"
+                        style="@style/image_icon_topic"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/icon_password_g" />
+
+                    <TextView
+                        android:id="@+id/ivopen"
+                        style="@style/image_icon_end"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/icon_register_eye_nar" />
+
+                    <EditText
+                        android:id="@+id/etconfirm"
+                        style="@style/edit_MTEditTextWithDel"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@id/ivopen"
+                        android:layout_toRightOf="@id/ivconfirm"
+                        android:hint="@string/input_confirm_pwd"
+                        android:inputType="text" />
+                </RelativeLayout>
+
+                <View style="@style/common_horizontal_division_line_style" />
+
+                <RelativeLayout
+                    android:id="@+id/layphone"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp" >
+
+                    <TextView
+                        android:id="@+id/ivphone"
+                        style="@style/image_icon_topic"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/icon_register_phone" />
+
+                    <EditText
+                        android:id="@+id/etphone"
+                        style="@style/edit_MTEditTextWithDel"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/ivphone"
+                        android:hint="@string/input_phone"
+                        android:inputType="phone" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/layrole"
+                style="@style/layout_edit3_n"
+                android:layout_marginTop="20dp" >
+
+                <TextView
+                    android:id="@+id/ivrole"
+                    style="@style/image_icon_topic"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/icon_register_id" />
+
+                <RelativeLayout
+                    android:id="@+id/btnselect"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/ivrole" >
+
+                    <TextView
+                        android:id="@+id/ivgo"
+                        style="@style/image_icon_end"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/icon_register_go" />
+
+                    <TextView
+                        android:id="@+id/tvrole"
+                        style="@style/edit_MTEditTextWithDel"
+                        android:layout_alignParentLeft="true"
+                        android:layout_toLeftOf="@id/ivgo"
+                        android:hint="@string/input_role"
+                        android:textSize="18sp" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/laycarnumber"
+                style="@style/layout_edit3_n"
+                android:layout_marginTop="4dp"
+                android:visibility="gone" >
+
+                <TextView
+                    android:id="@+id/ivcarnumber"
+                    style="@style/image_icon_topic"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/icon_register_id" />
+
+                <EditText
+                    android:id="@+id/etcarnumber"
+                    style="@style/edit_MTEditTextWithDel"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/ivcarnumber"
+                    android:hint="@string/input_carnumber"
+                    android:inputType="text" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/laylocation"
+                style="@style/layout_edit3_n"
+                android:layout_marginTop="4dp"
+                android:visibility="gone" >
+
+                <TextView
+                    android:id="@+id/ivlocation"
+                    style="@style/image_icon_topic"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/icon_register_id" />
+
+                <EditText
+                    android:id="@+id/etlocation"
+                    style="@style/edit_MTEditTextWithDel"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/ivlocation"
+                    android:hint="@string/input_location"
+                    android:inputType="text" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:bottom="2dp"
+        android:left="2dp"
+        android:right="2dp"
+        android:top="2dp">
+        <shape android:shape="rectangle" >
+
+            <!-- 这块的 corner重要作用是 控制：那个圆角的半径，值越大，半径越大！圆角的弧度就越大 -->
+            <corners 
+                android:topLeftRadius="15dip" 
+                android:topRightRadius="15dip" 
+                />
+
+            <solid android:color="#ffffff" />
+
+            <gradient
+                android:angle="0"
+                android:endColor="#7A7A7A"
+                android:startColor="#7A7A7A" />
+        </shape>
+    </item>
+    <item
+        android:bottom="2dp"
+        android:left="4dp"
+        android:right="4dp"
+        android:top="2dp">
+        <shape android:shape="rectangle" >
+
+            <!-- 这块的 corner重要作用是 控制：那个圆角的半径，值越大，半径越大！圆角的弧度就越大 -->
+            <corners 
+                android:topLeftRadius="15dip" 
+                android:topRightRadius="15dip" 
+                />
+
+            <solid android:color="#ffffff" />
+
+            <gradient
+                android:angle="0"
+               	android:endColor="#ffffff"
+                android:startColor="#ffffff" />
+        </shape>
+    </item>
+</layer-list>

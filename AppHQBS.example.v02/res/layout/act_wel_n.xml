@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        tools:ignore="UselessParent" >
+
+        <TextView
+            android:id="@+id/imtop"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@drawable/img_bg_g"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerInParent="true" >
+
+        <LinearLayout
+            android:id="@+id/layedit"
+            style="@style/layout_edit_n"
+            android:layout_centerInParent="true"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:id="@+id/layuid"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp" >
+
+                <TextView
+                    android:id="@+id/ivuid"
+                    android:layout_alignParentLeft="true"
+                    style="@style/image_icon_topic"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/icon_account_g" />
+
+                <com.model.tool.view.MTEditTextWithDel
+                    android:id="@+id/etid"
+                    style="@style/edit_MTEditTextWithDel"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/ivuid"
+                    android:hint="@string/uid"
+                    android:inputType="text" />
+            </RelativeLayout>
+
+            <View style="@style/common_horizontal_division_line_style" />
+
+            <RelativeLayout
+                android:id="@+id/layupwd"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp" >
+
+                <TextView
+                    android:id="@+id/ivupwd"
+                    style="@style/image_icon_topic"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/icon_password_g" />
+
+                <com.model.tool.view.MTEditTextWithDel
+                    android:id="@+id/etpwd"
+                    style="@style/edit_MTEditTextWithDel"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/ivupwd"
+                    android:hint="@string/upwd"
+                    android:inputType="textPassword" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnlogin"
+            style="@style/btn_login_n"
+            android:layout_below="@id/layedit"
+            android:layout_marginTop="20dp"
+            android:text="@string/login" />
+
+        <RelativeLayout
+            android:id="@+id/btnsignup"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/btnlogin"
+            android:layout_marginRight="70dp" >
+			<TextView
+                android:id="@+id/ivSignup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

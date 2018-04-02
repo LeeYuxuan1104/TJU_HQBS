@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff" >
+
+    <LinearLayout
+        android:id="@+id/laybottom"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@drawable/shape_delivery_add_bg_n" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <include
+        android:id="@+id/includetop"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        layout="@layout/act_topbar_n" />
+
+    <LinearLayout
+        android:id="@+id/laymiddle"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/includetop"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/l1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/shape_delivery_add2_bg_n"
+            android:orientation="vertical"
+            tools:ignore="UselessParent" >
+
+            <RelativeLayout
+                android:id="@+id/layorder"
+                style="@style/text_info_sign" >
+
+                <TextView
+                    android:id="@+id/tvorder"
+                    style="@style/txt_topic"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/topic_sign_order" />
+
+                <RelativeLayout
+                    android:id="@+id/btndetail"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true" >
+
+                    <TextView
+                        android:id="@+id/ivdetail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/icon_sign_for_list" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/etorder"
+                    style="@style/text_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/btndetail"
+                    android:layout_toRightOf="@id/tvorder" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/laydeadline"
+                style="@style/text_info_sign" >
+
+                <TextView
+                    android:id="@+id/ivdeadline"
+                    style="@style/txt_topic"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/topic_sign_date" />
+
+                <TextView
+                    android:id="@+id/etdeadline"
+                    style="@style/text_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_toRightOf="@id/ivdeadline" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/laygoal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp" >
+
+                <TextView
+                    android:id="@+id/ivgoal"
+                    style="@style/txt_topic"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/topic_sign_goal" />
+
+                <TextView
+                    android:id="@+id/etgoal"
+                    style="@style/text_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_toRightOf="@id/ivgoal" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/laystatus"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp" >
+
+                <TextView
+                    android:id="@+id/ivstatus"
+                    style="@style/txt_topic"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/topic_sign_status" />
+
+                <TextView
+                    android:id="@+id/etstate"
+                    style="@style/txt_topic"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_toRightOf="@id/ivstatus" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

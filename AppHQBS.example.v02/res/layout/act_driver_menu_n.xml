@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#dedede" >
+
+    <!-- 最内层的内容 -->
+
+    <RelativeLayout
+        android:id="@+id/laytop"
+        android:layout_width="fill_parent"
+        android:layout_height="210dp"
+        android:layout_alignParentTop="true" >
+
+        <TextView
+            android:id="@+id/ivtop"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/img_top_bg" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/ivtop" />
+
+        <RelativeLayout
+            android:id="@+id/laysearch"
+            style="@style/edit_info_search"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp" >
+
+            <RelativeLayout
+                android:id="@+id/btnsearch"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:clickable="true" >
+
+                <TextView
+                    android:id="@+id/ivsearch"
+                    style="@style/image_icon_topic"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/btn_search_n" />
+            </RelativeLayout>
+
+            <com.model.tool.view.MTEditTextWithDel
+                android:id="@+id/etid"
+                style="@style/edit_MTEditTextWithDel"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/btnsearch"
+                android:hint="@string/input_collection_id"
+                android:inputType="text" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/laybuttom"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/laytop"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/shape_list_n"
+        android:orientation="vertical" >
+
+        <ListView
+            android:id="@+id/listmenu"
+            style="@style/list_show_n"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp" >
+        </ListView>
+    </LinearLayout>
+
+    <!-- 最表层的界面内容 -->
+
+    <include
+        android:id="@+id/includetop"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        layout="@layout/act_topbar_n" />
+
+    <include
+        android:id="@+id/includebuttom"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        layout="@layout/act_bottombar" />
+
+</RelativeLayout>

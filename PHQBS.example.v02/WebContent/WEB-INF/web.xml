@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>PHQBS.example</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <!-- 用户信息的操作处理-->
+  <servlet>
+    <servlet-name>user_info</servlet-name>
+    <servlet-class>cn.controller.CCheckUserinfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>user_info</servlet-name>
+    <url-pattern>/user_info</url-pattern>
+  </servlet-mapping>
+  <!-- 角色信息的操作处理-->
+  <servlet>
+    <servlet-name>role</servlet-name>
+    <servlet-class>cn.controller.CCheckRoleinfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>role</servlet-name>
+    <url-pattern>/role</url-pattern>
+  </servlet-mapping>
+  <!-- 允许权限的操作处理-->
+  <servlet>
+    <servlet-name>permission</servlet-name>
+    <servlet-class>cn.controller.CCheckPermissioninfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>permission</servlet-name>
+    <url-pattern>/permission</url-pattern>
+  </servlet-mapping>
+  <!-- 电池订单的操作处理-->
+  <servlet>
+    <servlet-name>delivery</servlet-name>
+    <servlet-class>cn.controller.CCheckDeliveryinfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>delivery</servlet-name>
+    <url-pattern>/delivery</url-pattern>
+  </servlet-mapping>
+  <!-- 回收订单的操作处理-->
+  <servlet>
+    <servlet-name>collection</servlet-name>
+    <servlet-class>cn.controller.CCheckCollectioninfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>collection</servlet-name>
+    <url-pattern>/collection</url-pattern>
+  </servlet-mapping>
+  <!-- 电池信息的操作处理-->
+  <servlet>
+    <servlet-name>battery</servlet-name>
+    <servlet-class>cn.controller.CCheckBatteryinfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>battery</servlet-name>
+    <url-pattern>/battery</url-pattern>
+  </servlet-mapping>
+  <!-- 议价的操作处理-->
+  <servlet>
+    <servlet-name>bargain</servlet-name>
+    <servlet-class>cn.controller.CCheckBargaininfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>bargain</servlet-name>
+    <url-pattern>/bargain</url-pattern>
+  </servlet-mapping>
+  <!-- 订单以及新电池的操作处理-->
+  <servlet>
+    <servlet-name>collectionanddelivery_info</servlet-name>
+    <servlet-class>cn.controller.CCheckCollectionAndDeliveryinfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>collectionanddelivery_info</servlet-name>
+    <url-pattern>/collectionanddelivery_info</url-pattern>
+  </servlet-mapping>
+
+</web-app>

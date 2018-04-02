@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/includeTop"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        layout="@layout/act_topbar_n" />
+
+    <Button
+        android:id="@+id/btnsignup"
+        style="@style/btn_signup_n"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/ok" />
+
+    <RelativeLayout
+        android:id="@+id/laylocation"
+        style="@style/layout_edit3_n"
+        android:layout_below="@id/includeTop"
+        android:layout_marginTop="4dp" >
+
+        <TextView
+            android:id="@+id/tvlocation"
+            style="@style/image_icon_topic"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            />
+    </RelativeLayout>
+
+    <com.amap.api.maps.MapView
+        android:id="@+id/map"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/includeTop" >
+    </com.amap.api.maps.MapView>
+
+</RelativeLayout>

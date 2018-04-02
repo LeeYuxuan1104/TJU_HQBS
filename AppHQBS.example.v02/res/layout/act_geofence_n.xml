@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff" >
+
+    <include
+        android:id="@+id/includeTop"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        layout="@layout/act_topbar_n" />
+
+    <com.amap.api.maps.MapView
+        android:id="@+id/map"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/includeTop" >
+    </com.amap.api.maps.MapView>
+
+    <Button
+        android:id="@+id/btnsubmit"
+        style="@style/btn_signup2_n"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/confirm" />
+
+    <RelativeLayout
+        android:id="@+id/layaddress"
+        style="@style/edit_locate_n"
+        android:layout_marginTop="15dp"
+        android:layout_below="@id/includeTop"
+        >
+
+        <com.model.tool.view.MTEditTextWithDel
+            android:id="@+id/etaddress"
+            style="@style/edit_MTEditTextWithDel"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:hint="@string/input_location"
+            android:inputType="textMultiLine"
+            android:minLines="2" />
+    </RelativeLayout>
+
+</RelativeLayout>

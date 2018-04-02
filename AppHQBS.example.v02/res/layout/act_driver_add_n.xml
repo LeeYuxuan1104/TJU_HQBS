@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#dedede" >
+
+    <include
+        android:id="@+id/includetop"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        layout="@layout/act_topbar_n" />
+
+    <RelativeLayout
+        android:id="@+id/laysearch"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/includetop"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_search_n" >
+
+        <RelativeLayout
+            android:id="@+id/btnsearch"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:clickable="true" >
+
+            <TextView
+                android:id="@+id/ivsearch"
+                style="@style/image_icon_topic"
+                android:layout_centerInParent="true"
+                android:background="@drawable/btn_search_n" />
+        </RelativeLayout>
+
+        <com.model.tool.view.MTEditTextWithDel
+            android:id="@+id/etid"
+            style="@style/edit_MTEditTextWithDel"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/btnsearch"
+            android:hint="@string/input_driver_name"
+            android:inputType="text" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/laybottom"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/laysearch"
+        android:background="#ffffff" >
+
+        <ListView
+            android:id="@+id/listdrivers"
+            style="@style/list_show_n"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+        </ListView>
+    </RelativeLayout>
+
+</RelativeLayout>

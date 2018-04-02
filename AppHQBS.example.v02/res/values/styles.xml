@@ -1,0 +1,360 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+
+    <style name="customtitlebar" parent="android:Theme.Holo.Light">
+        <item name="android:actionBarStyle"> @style/MyActionBar</item>
+    </style>
+
+    <style name="MyActionBar" parent="@android:style/Widget.Holo.ActionBar">
+        <item name="android:titleTextStyle">@style/MyTheme.ActionBar.TitleTextStyle</item>
+    </style>
+
+    <style name="MyTheme.ActionBar.TitleTextStyle" parent="android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/white1</item>
+    </style>
+
+    <style name="input_style_edit">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:background">@drawable/shape_edit</item>
+    </style>
+
+    <!-- 输入框的内部样式 -->
+    <style name="input_style_table">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:background">@drawable/shape_table</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <!-- 可删除框的外围样式 -->
+    <style name="input_style_EditTextWithDel">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:background">@null</item>
+        <item name="android:layout_marginLeft">5sp</item>
+        <item name="android:layout_marginRight">5sp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+    </style>
+    <!-- 输入标题 -->
+    <style name="input_style_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">5sp</item>
+        <item name="android:layout_marginRight">5sp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <!-- 按钮 -->
+    <style name="btn_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">10sp</item>
+        <item name="android:layout_marginRight">10sp</item>
+        <item name="android:layout_marginTop">5sp</item>
+        <item name="android:layout_marginBottom">5sp</item>
+    </style>
+    <!-- 按钮提交 -->
+    <style name="btn_style_submit">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:background">@drawable/btn010_n</item>
+    </style>
+    <!-- 下拉列表 -->
+    <style name="spinner_style">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">10sp</item>
+        <item name="android:layout_marginRight">10sp</item>
+        <item name="android:spinnerMode">dropdown</item>
+        <item name="android:theme">@style/customtitlebar</item>
+    </style>
+
+    <!-- 文本框内容 -->
+    <style name="textview_style_content">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">10sp</item>
+        <item name="android:layout_marginRight">10sp</item>
+        <item name="android:background">@null</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <!-- 标题 -->
+    <style name="textview_style_topic">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#C1CDCD</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+    <!-- 按钮 -->
+    <style name="button_style_small">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">2sp</item>
+        <item name="android:layout_marginRight">2sp</item>
+        <item name="android:background">@drawable/btn010_n</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <!-- 新的样式内容 -->
+    <!-- 登錄按鈕的樣式 -->
+    <style name="btn_login_n">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">55dp</item>
+        <item name="android:layout_marginLeft">50dp</item>
+        <item name="android:layout_marginRight">50dp</item>
+        <item name="android:background">@drawable/btn_login_n</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:clickable">true</item>
+    </style>
+    <!-- 輸入框的內容 -->
+    <style name="layout_edit_n">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">120dp</item>
+        <item name="android:layout_marginLeft">50dp</item>
+        <item name="android:layout_marginRight">50dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/shape_background_n</item>
+    </style>
+    <!-- 分割線 -->
+    <style name="common_horizontal_division_line_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">#dddddd</item>
+    </style>
+
+    <style name="common_horizontal_division_line2_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.7dp</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">#dddddd</item>
+    </style>
+    <!-- 圖片 -->
+    <style name="image_icon_topic">
+        <item name="android:layout_width">30dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+    </style>
+
+    <style name="txt_topic">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:layout_marginLeft">10dp</item>
+    </style>
+
+    <style name="image_icon_end">
+        <item name="android:layout_width">20dp</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+    </style>
+    <!-- 自定義輸入框 -->
+    <style name="edit_MTEditTextWithDel">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:background">@null</item>
+    </style>
+    <!-- 自定义输入框 -->
+    <style name="edit_info_search">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_marginLeft">30dp</item>
+        <item name="android:layout_marginRight">30dp</item>
+        <item name="android:background">@drawable/shape_search_n</item>
+    </style>
+
+    <style name="edit_info_add">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:background">@drawable/shape_edit0_n</item>
+    </style>
+    <style name="edit_info_add2">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_marginLeft">1dp</item>
+        <item name="android:layout_marginRight">1dp</item>
+        <item name="android:background">@drawable/shape_edit0_n</item>
+    </style>
+    <style name="text_info_sign">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+    </style>
+    <style name="edit_info_framework">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">150dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:background">@drawable/shape_edit0_n</item>
+    </style>
+    <style name="btn_info_add">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_marginLeft">1dp</item>
+        <item name="android:layout_marginRight">1dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:background">@drawable/shape_edit0_n</item>
+    </style>
+    <!-- 註冊按鈕 -->
+    <style name="btn_signup_n">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">55dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:background">@drawable/btn_login_n</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="btn_signup2_n">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">55dp</item>
+        <item name="android:layout_marginLeft">70dp</item>
+        <item name="android:layout_marginRight">70dp</item>
+        <item name="android:background">@drawable/btn_login_n</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="edit_locate_n">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">70dp</item>
+        <item name="android:layout_marginRight">70dp</item>
+        <item name="android:background">@drawable/shape_background4_n</item>
+    </style>
+    <!-- 列表信息 -->
+    <style name="list_show_n">
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:divider">#e8e8e8</item>
+        <item name="android:dividerHeight">0.5dip</item>
+    </style>
+    <!-- 輸入框的內容 -->
+    <style name="layout_edit2_n">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">200dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/shape_background2_n</item>
+    </style>
+    <!-- 輸入框的內容 -->
+    <style name="layout_edit3_n">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:clickable">true</item>
+        <item name="android:background">@drawable/btn_edit_n</item>
+    </style>
+    <!-- 格子样式 -->
+    <style name="signup_chooserole_n">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:background">@drawable/btn_change_n</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="signup_choosecontent_n">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+    <!-- 列表样式 -->
+    <style name="list_style">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:divider">#E8E8E8</item>
+        <item name="android:dividerHeight">2dip</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+    </style>
+    <!-- 提示框的样式 -->
+    <style name="Transparent" parent="android:style/Theme.Dialog">
+        <item name="android:windowBackground">@color/no_color</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@+android:style/Animation.Translucent</item>
+    </style>
+    <!-- 下拉列表样式 -->
+    <style name="item_spinner_2elements" >
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+	<!-- 显示文本 -->
+	<style name="text_content" >
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:minLines">3</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:gravity">center</item>
+    </style>
+</resources>

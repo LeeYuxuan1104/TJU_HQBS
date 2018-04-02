@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff" >
+
+    <LinearLayout
+        android:id="@+id/laybottom"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@drawable/shape_delivery_add_bg_n" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <include
+        android:id="@+id/includetop"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        layout="@layout/act_topbar_n" />
+
+    <RelativeLayout
+        android:id="@+id/laymiddle"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/includetop"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_delivery_add1_bg_n" >
+
+        <Button
+            android:id="@+id/btnsubmit"
+            style="@style/btn_signup_n"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/confirm_submit" />
+
+        <ScrollView
+            android:id="@+id/sv"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_above="@id/btnsubmit"
+            android:layout_marginTop="20dp" >
+
+            <LinearLayout
+                android:id="@+id/l1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <RelativeLayout
+                    android:id="@+id/layorder"
+                    style="@style/text_info_sign" >
+
+                    <TextView
+                        android:id="@+id/tvorder"
+                        style="@style/txt_topic"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="@string/topic_sign_order" />
+
+                    <RelativeLayout
+                        android:id="@+id/btndetail"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true" >
+
+                        <TextView
+                            android:id="@+id/ivdetail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:background="@drawable/icon_sign_for_list" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/etorder"
+                        style="@style/text_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@id/btndetail"
+                        android:layout_toRightOf="@id/tvorder" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/laydeadline"
+                    style="@style/text_info_sign" >
+
+                    <TextView
+                        android:id="@+id/ivdeadline"
+                        style="@style/txt_topic"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="@string/topic_sign_date" />
+
+                    <TextView
+                        android:id="@+id/etdeadline"
+                        style="@style/text_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:layout_toRightOf="@id/ivdeadline" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/laygoal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="5dp" >
+
+                    <TextView
+                        android:id="@+id/ivgoal"
+                        style="@style/txt_topic"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="@string/topic_sign_goal" />
+
+                    <TextView
+                        android:id="@+id/etgoal"
+                        style="@style/text_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:layout_toRightOf="@id/ivgoal" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/laystatus"
+                    android:layout_width="fill_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/ivstatus"
+                        style="@style/txt_topic"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="@string/topic_sign_status" />
+					<TextView 
+					    android:id="@+id/btngood"
+					    android:layout_width="80dp"
+					    android:layout_height="50dp"
+					    android:layout_marginLeft="5dp"
+					    android:layout_marginRight="5dp"
+					    android:layout_centerVertical="true"
+					    android:layout_toRightOf="@id/ivstatus"
+					    android:background="@drawable/shape_btn1_n"
+					    android:text="@string/btn_sign_good"
+					    android:textColor="#ffffff"
+					    android:textStyle="bold"
+					    android:gravity="center"
+					    />
+					<TextView 
+					    android:id="@+id/btnbad"
+					    android:layout_width="80dp"
+					    android:layout_height="50dp"
+					    android:layout_marginLeft="5dp"
+					    android:layout_marginRight="5dp"
+					    android:layout_centerVertical="true"
+					    android:layout_toRightOf="@id/btngood"
+					    android:background="@drawable/shape_btn0_n"
+					    android:text="@string/btn_sign_bad"
+					    android:textColor="#000000"
+					    android:textStyle="bold"
+					    android:gravity="center"
+					    />
+                    
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoper"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="horizontal"
+                    tools:ignore="DisableBaselineAlignment" >
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        tools:ignore="UselessLeaf" >
+
+                        <RelativeLayout
+                            android:id="@+id/btnphoto"
+                            android:layout_width="fill_parent"
+                            android:layout_height="60dp"
+                            android:clickable="true"
+                            android:layout_weight="1"
+                            tools:ignore="NestedWeights" >
+
+                            <TextView
+                                android:id="@+id/ivphoto"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true" 
+                                android:background="@drawable/icon_sign_for_camera"
+                                />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/btnsign"
+                            android:layout_width="fill_parent"
+                            android:layout_height="60dp"
+                            android:clickable="true"
+                            android:layout_weight="1" >
+
+                            <TextView
+                                android:id="@+id/ivsign"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true" 
+                                android:background="@drawable/icon_sign_for"
+                                />
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        tools:ignore="UselessLeaf" >
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+
+</RelativeLayout>

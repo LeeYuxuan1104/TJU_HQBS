@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <include
+        android:id="@+id/includeTop"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        layout="@layout/act_topbar_n" />
+
+    <TextView
+        android:id="@+id/tv_guide"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/includeTop"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:textStyle="bold" 
+        />
+
+    <LinearLayout
+        android:id="@+id/laybottom"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/shape_round_bottom"
+        android:orientation="vertical" 
+        >
+
+        <ScrollView
+            android:id="@+id/sv"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="#eeeee0" >
+
+            <TextView
+                android:id="@+id/tv_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </ScrollView>
+    </LinearLayout>
+
+    <com.amap.api.maps.MapView
+        android:id="@+id/map"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/tv_guide" 
+        android:layout_above="@id/laybottom"
+        >
+    </com.amap.api.maps.MapView>
+
+</RelativeLayout>

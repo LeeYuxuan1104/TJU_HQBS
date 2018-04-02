@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_bottombar_0_n"
+    android:orientation="horizontal"
+    tools:ignore="DisableBaselineAlignment" >
+
+    <RelativeLayout
+        android:id="@+id/btnleft"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_weight="1"
+        android:clickable="true" >
+
+        <TextView
+            android:id="@+id/ivleft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tvleft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ivleft"
+            android:layout_centerHorizontal="true"
+            android:text="@string/choose_left"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/btnmiddle"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_weight="1"
+        android:clickable="true" >
+
+        <TextView
+            android:id="@+id/ivmiddle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tvmiddle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ivmiddle"
+            android:layout_centerHorizontal="true"
+            android:text="@string/choose_middle"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/btnright"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_weight="1"
+        android:clickable="true" >
+
+        <TextView
+            android:id="@+id/ivright"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tvright"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ivright"
+            android:text="@string/choose_right"
+            android:layout_centerHorizontal="true"
+            />
+    </RelativeLayout>
+
+</LinearLayout>

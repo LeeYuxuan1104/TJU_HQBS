@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <include
+        android:id="@+id/includeTop"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        layout="@layout/act_topbar_n" />
+
+    <LinearLayout
+        android:id="@+id/layBottom"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/shape_round_bottom"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btnSumit"
+            style="@style/btn_style_submit"
+            android:text="@string/submit" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/layBottom"
+        android:layout_below="@id/includeTop"
+        android:background="#eeeee0" >
+
+        <LinearLayout
+            android:id="@+id/layMid"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            tools:ignore="ScrollViewSize" >
+
+            <RelativeLayout
+                android:id="@+id/layname"
+                style="@style/input_style_edit" >
+
+                <TextView
+                    android:id="@+id/tvname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/driver"
+                    android:textColor="#C1CDCD"
+                    android:textSize="20sp" />
+
+                <Spinner
+                    android:id="@+id/spdriver"
+                    style="@style/spinner_style"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/tvname" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/laymodel"
+                style="@style/input_style_edit" >
+
+                <TextView
+                    android:id="@+id/tvmodel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/model"
+                    android:textColor="#C1CDCD"
+                    android:textSize="20sp" />
+
+                <Spinner
+                    android:id="@+id/spmodel"
+                    style="@style/spinner_style"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/tvmodel" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/laybrand"
+                style="@style/input_style_edit" >
+
+                <TextView
+                    android:id="@+id/tvbrand"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/brand"
+                    android:textColor="#C1CDCD"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/etbrand"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="10sp"
+                    android:layout_toRightOf="@id/tvbrand"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layprice"
+                style="@style/input_style_edit" >
+
+                <TextView
+                    android:id="@+id/tvprice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/price"
+                    android:textColor="#C1CDCD"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/etprice"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="10sp"
+                    android:layout_toRightOf="@id/tvprice"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/laycount"
+                style="@style/input_style_edit"
+                android:focusable="true"
+                android:focusableInTouchMode="true" >
+
+                <TextView
+                    android:id="@+id/tvcount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/count"
+                    android:textColor="#C1CDCD"
+                    android:textSize="20sp" />
+
+                <com.model.tool.view.MTEditTextWithDel
+                    android:id="@+id/etcount"
+                    style="@style/input_style_EditTextWithDel"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/tvcount"
+                    android:hint="@string/input"
+                    android:inputType="text|number" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/laygoal"
+                style="@style/input_style_edit" >
+
+                <TextView
+                    android:id="@+id/tvgoal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/goal"
+                    android:textColor="#C1CDCD"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/btnLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/btn010_n"
+                    android:text="@string/locate"
+                    android:textColor="#ffffff"
+                    android:textSize="10sp"
+                    tools:ignore="SmallSp" />
+
+                <com.model.tool.view.MTEditTextWithDel
+                    android:id="@+id/etgoal"
+                    style="@style/input_style_EditTextWithDel"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/btnLocation"
+                    android:layout_toRightOf="@id/tvgoal"
+                    android:hint="@string/input"
+                    android:inputType="text" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/laydeadline"
+                style="@style/input_style_edit" >
+
+                <TextView
+                    android:id="@+id/tvdeadline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/dealine"
+                    android:textColor="#C1CDCD"
+                    android:textSize="20sp" />
+
+                <com.model.tool.view.MTEditTextWithDel
+                    android:id="@+id/etdeadline"
+                    style="@style/input_style_EditTextWithDel"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/tvdeadline"
+                    android:clickable="true"
+                    android:focusableInTouchMode="false"
+                    android:hint="@string/input"
+                    android:inputType="text|datetime" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

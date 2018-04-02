@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff" >
+
+    <LinearLayout
+        android:id="@+id/laybottom"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@drawable/shape_delivery_add_bg_n" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <include
+        android:id="@+id/includetop"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        layout="@layout/act_topbar_n" />
+
+    <RelativeLayout
+        android:id="@+id/laymiddle"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/includetop"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_delivery_add1_bg_n" >
+
+        <Button
+            android:id="@+id/btnsubmit"
+            style="@style/btn_signup_n"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/confirm_submit" />
+
+        <ScrollView
+            android:id="@+id/sv"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_above="@id/btnsubmit"
+            android:layout_marginTop="20dp" >
+
+            <LinearLayout
+                android:id="@+id/l1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <RelativeLayout
+                    android:id="@+id/laydriver"
+                    style="@style/edit_info_add" >
+
+                    <TextView
+                        android:id="@+id/ivdriver"
+                        style="@style/txt_topic"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="@string/topic_delivery_add_name" />
+
+                    <Spinner
+                        android:id="@+id/etdrivers"
+                        style="@style/spinner_style"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/ivdriver" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/laygoal"
+                    style="@style/edit_info_add" >
+
+                    <TextView
+                        android:id="@+id/ivgoal"
+                        style="@style/txt_topic"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="@string/topic_delivery_add_goal" />
+
+                    <RelativeLayout
+                        android:id="@+id/btnlocation"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_alignParentRight="true" >
+
+                        <TextView
+                            android:id="@+id/ivlocation"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_centerInParent="true"
+                            android:background="@drawable/icon_inv_loca_sel" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/etgoal"
+                        style="@style/edit_MTEditTextWithDel"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@id/btnlocation"
+                        android:layout_toRightOf="@id/ivgoal"
+                        android:hint="@string/input_info"
+                        android:maxLines="2"
+                        android:textColor="#000000" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/laydeadline"
+                    style="@style/edit_info_add" >
+
+                    <TextView
+                        android:id="@+id/ivdeadline"
+                        style="@style/txt_topic"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="@string/topic_delivery_add_deadline" />
+
+                    <EditText
+                        android:id="@+id/etdeadline"
+                        style="@style/edit_MTEditTextWithDel"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/ivdeadline"
+                        android:hint="@string/input_info"
+                        android:inputType="time" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/laybuy"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical" >
+
+                    <RelativeLayout
+                        android:id="@+id/laymodel"
+                        style="@style/edit_info_add" >
+
+                        <TextView
+                            android:id="@+id/ivmodel"
+                            style="@style/txt_topic"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:text="@string/topic_delivery_add_model" />
+
+                        <Spinner
+                            android:id="@+id/etmodels"
+                            style="@style/spinner_style"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@id/ivmodel" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:orientation="horizontal"
+                        tools:ignore="DisableBaselineAlignment" >
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical" >
+
+                            <RelativeLayout
+                                android:id="@+id/laycount"
+                                style="@style/edit_info_add2"
+                                tools:ignore="UselessParent" >
+
+                                <TextView
+                                    android:id="@+id/ivcount"
+                                    style="@style/txt_topic"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerVertical="true"
+                                    android:text="@string/topic_delivery_add_count" />
+
+                                <EditText
+                                    android:id="@+id/etcount"
+                                    style="@style/edit_MTEditTextWithDel"
+                                    android:layout_centerVertical="true"
+                                    android:layout_toRightOf="@id/ivcount"
+                                    android:hint="@string/input_info2"
+                                    android:inputType="number" />
+                            </RelativeLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical" >
+
+                            <RelativeLayout
+                                android:id="@+id/layprice"
+                                style="@style/edit_info_add2"
+                                tools:ignore="UselessParent" >
+
+                                <TextView
+                                    android:id="@+id/ivprice"
+                                    style="@style/txt_topic"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerVertical="true"
+                                    android:text="@string/topic_delivery_add_price" />
+
+                                <EditText
+                                    android:id="@+id/etprice"
+                                    style="@style/edit_MTEditTextWithDel"
+                                    android:layout_centerVertical="true"
+                                    android:layout_toRightOf="@id/ivprice"
+                                    android:hint="@string/input_info2"
+                                    android:inputType="number" />
+                            </RelativeLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical" >
+
+                            <RelativeLayout
+                                android:id="@+id/btnadd"
+                                style="@style/edit_info_add2"
+                                tools:ignore="UselessParent" >
+
+                                <TextView
+                                    android:id="@+id/ivadd"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:textSize="30sp"
+                                    android:text="@string/btn_add" />
+                            </RelativeLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <RelativeLayout style="@style/edit_info_framework" >
+
+                        <ListView
+                            android:id="@+id/listgoods"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:divider="#ffffff"
+                            android:cacheColorHint="#00000000"
+                            android:dividerHeight="0dip"
+                            tools:ignore="NestedScrolling" >
+
+                        </ListView>
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+
+</RelativeLayout>

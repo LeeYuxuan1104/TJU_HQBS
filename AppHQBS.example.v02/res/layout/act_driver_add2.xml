@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <include
+        android:id="@+id/includeTop"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        layout="@layout/act_topbar_n" />
+
+    <include
+        android:id="@+id/includeButtom"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        layout="@layout/act_bottombar" />
+
+    <LinearLayout
+        android:id="@+id/laymid"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/includeButtom"
+        android:layout_below="@id/includeTop"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#eeeee0" >
+
+            <RelativeLayout
+                android:id="@+id/laysearch"
+                style="@style/input_style_edit"
+                tools:ignore="UselessParent" >
+
+                <ImageView
+                    android:id="@+id/isearch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_search"
+                    tools:ignore="ContentDescription" />
+
+                <com.model.tool.view.MTEditTextWithDel
+                    android:id="@+id/etsearch"
+                    style="@style/input_style_EditTextWithDel"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/isearch"
+                    android:hint="@string/searchinfo"
+                    android:inputType="text" />
+            </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#ffffff" >
+            <ListView
+                android:id="@+id/listshow"
+                style="@style/list_style" >
+            </ListView>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
